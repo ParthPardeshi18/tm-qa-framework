@@ -2,6 +2,8 @@
 
 A portfolio project that simulates how a Transaction Monitoring **Quality Assurance** team reviews completed AML investigations. It checks whether financial crime risk was identified, investigated, evidenced and concluded correctly. The focus is reviewer judgement, not modelling.
 
+**Live app:** [tm-app-framework-gikizvs6uqh3n4ltac67vy.streamlit.app](https://tm-app-framework-gikizvs6uqh3n4ltac67vy.streamlit.app/)
+
 > **Synthetic data - portfolio project. Not Barclays work and not professional casework.**
 > - Transactions come from the synthetic SAML-D dataset, and customer profiles are synthetic.
 > - The investigation case notes and QA assessments were prepared with AI assistance and reviewed by the project author for factual accuracy and consistency.
@@ -116,9 +118,9 @@ python -m src.alerts
 
 This regenerates alerts, profiles, evaluation files and the sample. Re-running under the pinned duckdb 2.0.0 reproduces every committed output exactly, except for floating-point noise in `alerts.trigger_value` (at most 2.3e-10, from summation order). Alert IDs, accounts, dates and the 24-alert sample are unchanged. `python -m src.case_prep` builds blank case templates and never overwrites a case that has investigator content. `python -m src.qa_engine` recomputes QA outcomes and scores from `qa/findings.csv`.
 
-## Deployment (not yet done)
+## Deployment
 
-No live URL exists yet, and deployment has not been attempted.
+The app is live on Streamlit Community Cloud at https://tm-app-framework-gikizvs6uqh3n4ltac67vy.streamlit.app/, deployed from branch `main` with main file `app/Home.py`. The steps below record how it was published and can be repeated for a fork.
 
 **What gets committed:** `app/`, `src/`, `config/`, `cases/`, `qa/`, `tests/`, `docs/` (including the PDF), `training/README.md`, `training/seeded_cases/`, `data/processed/` app inputs, `requirements.txt`, `pytest.ini`, `README.md` and `.gitignore`. That is about 31 MB, and the largest file is `data/processed/txns_alerted.parquet` at 29.5 MB, under GitHub's 100 MB limit.
 
@@ -163,7 +165,7 @@ The app reads only committed files, through paths relative to the repository, so
    ```
 
 3. At share.streamlit.io: **Create app** → choose the repository, branch `main`, and main file path `app/Home.py`. Under **Advanced settings**, choose Python 3.11 or newer. No secrets are needed.
-4. After the build, open each of the seven pages at desktop and mobile width. Confirm the disclaimer is shown, then add the URL to this README.
+4. After the build, open each of the seven pages at desktop and mobile width and confirm the disclaimer is shown.
 
 ## Repository
 

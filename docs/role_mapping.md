@@ -22,4 +22,4 @@ How this synthetic portfolio project maps to the capabilities of a Transaction M
 1. An independent reviewer to re-review the six borderline outcomes (CAL-01).
 2. A blind review of `training/seeded_cases/` by someone who has not seen the answer key, to produce a genuine hit rate.
 3. The author's review of the three worked examples.
-4. Deployment, and any claims about real-world TM or QA experience, which this project does not establish.
+4. Any claims about real-world TM or QA experience, which this project does not establish.

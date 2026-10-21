@@ -117,7 +117,7 @@ def build(path=OUT) -> int:
           "jurisdiction watchlist is a single FATF 23 June 2023 snapshot; window-level labels overstate what a rule caught. "
           f"Appeals logged: {len(f['appeals'])}. <b>Outstanding:</b> independent human calibration of the borderline outcomes; "
           "a genuinely blind review of the seeded training set (training/) to measure reviewer accuracy - no hit rate is "
-          "claimed; application not yet deployed."),
+          "claimed."),
     ]
     doc = SimpleDocTemplate(str(path), pagesize=A4, leftMargin=14 * mm, rightMargin=14 * mm, topMargin=11 * mm,
                             bottomMargin=10 * mm, title="QA Findings Report (synthetic portfolio work)")
