@@ -1,0 +1,32 @@
+# Raw data: SAML-D CSV is ~1 GB, never commit
+data/raw/*
+!data/raw/.gitkeep
+
+# Answer keys and per-alert label evaluation: keep out of the repo so blind review stays possible.
+# Regenerate with `python -m src.alerts` and `python training/answer_key/seed_training_set.py`.
+data/processed/alert_evaluation.parquet
+data/processed/profiles_answer_key.parquet
+data/processed/alert_sample_key.csv
+training/answer_key/
+
+# Unrelated dataset that happens to sit in the project folder
+WA_Fn-UseC_-Telco-Customer-Churn.csv
+
+# Python
+__pycache__/
+*.pyc
+.venv/
+venv/
+.pytest_cache/
+
+# Streamlit
+.streamlit/secrets.toml
+
+# Local Claude Code / dev-server config
+.claude/
+
+# OS / editor
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/

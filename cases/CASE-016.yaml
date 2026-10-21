@@ -1,0 +1,282 @@
+# Investigation case note: SYNTHETIC DATA, SIMULATED CASE.
+# Pre-filled: facts from investigator-facing data only (alert, synthetic KYC profile,
+# transactions). Amounts are in dataset monetary units (GBP assumed, unverified).
+# Do not edit `evidence`: tests/test_cases.py re-derives it from the source data.
+# Complete the null fields:
+#   date_opened / date_closed: YYYY-MM-DD
+#   red_flags_identified:      list of strings
+#   source_of_funds:           assessment of source of funds / wealth
+#   screening_adverse_media:   sanctions / PEP / adverse-media assessment
+#                              (no screening results exist in the data; the PEP and
+#                              adverse-media values in the evidence are KYC flags on file)
+#   rationale:                 reasoning that supports the disposition
+#   disposition:               CLOSE_NO_FURTHER_ACTION | ESCALATE_L2 | ESCALATE_SAR
+#   escalation_decision:       what is escalated, to whom, and why (or why not)
+# Disclosure tracking (leave null if no internal disclosure is made; never estimate):
+#   suspicion_formed_at:       ISO 8601 date-time, e.g. 2023-02-16T15:30:00
+#   internal_disclosure_at:    ISO 8601 date-time of the internal disclosure
+#   disclosure_recipient:      e.g. Nominated officer / MLRO
+#   referral_evidence:         reference or summary of the evidence supporting the referral
+case_id: CASE-016
+alert_id: TM04-01440
+scenario: TM04 Fan-in (many distinct senders)
+investigator: INV-A
+account_id: 572514864
+alert_date: '2023-07-30'
+date_opened: null
+date_closed: null
+customer_summary: 'Personal Banking, Care worker, declared income/turnover £10k–£25k, expected monthly
+  credits 833-2,083, account opened 2007-08-10, risk rating Low. KYC flags on file: PEP No, adverse media
+  No.'
+activity_reviewed: '90-day lookback 2023-05-02 to 2023-07-30: 245 credits totalling 3,000,193.46 from
+  23 distinct senders; 2 debits totalling 18,102.33 to 2 distinct receivers. Non-UK counterparty locations:
+  none. Alert window 2023-07-24 to 2023-07-30: 241 credits (2,955,619.38), 0 debits (0.00). Trigger: 21
+  distinct senders, credits totalling 2,955,619.38 in 7 days.'
+evidence:
+  amount_unit: dataset monetary units (GBP assumed, unverified)
+  alert:
+    window_start: '2023-07-24'
+    trigger_date: '2023-07-30'
+    trigger_value: 21.0
+    trigger_detail: 21 distinct senders, credits totalling 2,955,619.38 in 7 days
+  customer_profile:
+    segment: Personal Banking
+    occupation_or_sector: Care worker
+    declared_income_or_turnover_band: £10k–£25k
+    expected_monthly_credits_min_gbp: 833
+    expected_monthly_credits_max_gbp: 2083
+    account_open_date: '2007-08-10'
+    customer_risk_rating: Low
+    pep_flag: false
+    adverse_media_flag: false
+  review_period:
+    start: '2023-05-02'
+    end: '2023-07-30'
+    days: 90
+    requested_lookback_days: 90
+    truncated_by_dataset_start: false
+  lookback_activity:
+    transactions: 247
+    credits_count: 245
+    credits_total: 3000193.46
+    debits_count: 2
+    debits_total: 18102.33
+    distinct_senders: 23
+    distinct_receivers: 2
+    largest_credit: 22531.39
+    largest_debit: 18053.21
+    first_date: '2023-05-02'
+    last_date: '2023-07-30'
+    by_payment_type:
+      ACH:
+        credits_count: 68
+        credits_total: 842641.99
+        debits_count: 0
+        debits_total: 0.0
+      Cash Withdrawal:
+        credits_count: 0
+        credits_total: 0.0
+        debits_count: 1
+        debits_total: 49.12
+      Cheque:
+        credits_count: 63
+        credits_total: 785030.03
+        debits_count: 0
+        debits_total: 0.0
+      Credit card:
+        credits_count: 50
+        credits_total: 607259.52
+        debits_count: 1
+        debits_total: 18053.21
+      Debit card:
+        credits_count: 64
+        credits_total: 765261.92
+        debits_count: 0
+        debits_total: 0.0
+    counterparty_locations:
+      UK:
+        count: 247
+        total: 3018295.79
+    watchlist_counterparty_count: 0
+    watchlist_counterparty_total: 0.0
+    non_gbp_currency_transactions: 8
+  alert_window_activity:
+    transactions: 241
+    credits_count: 241
+    credits_total: 2955619.38
+    debits_count: 0
+    debits_total: 0.0
+    distinct_senders: 21
+    distinct_receivers: 0
+    largest_credit: 22531.39
+    largest_debit: null
+    first_date: '2023-07-26'
+    last_date: '2023-07-30'
+    by_payment_type:
+      ACH:
+        credits_count: 68
+        credits_total: 842641.99
+        debits_count: 0
+        debits_total: 0.0
+      Cheque:
+        credits_count: 63
+        credits_total: 785030.03
+        debits_count: 0
+        debits_total: 0.0
+      Credit card:
+        credits_count: 49
+        credits_total: 589441.3
+        debits_count: 0
+        debits_total: 0.0
+      Debit card:
+        credits_count: 61
+        credits_total: 738506.06
+        debits_count: 0
+        debits_total: 0.0
+    counterparty_locations:
+      UK:
+        count: 241
+        total: 2955619.38
+    watchlist_counterparty_count: 0
+    watchlist_counterparty_total: 0.0
+    non_gbp_currency_transactions: 8
+  credits_by_30_day_block:
+  - start: '2023-07-01'
+    end: '2023-07-30'
+    days: 30
+    credits_count: 242
+    credits_total: 2964622.12
+  - start: '2023-06-01'
+    end: '2023-06-30'
+    days: 30
+    credits_count: 2
+    credits_total: 26178.67
+  - start: '2023-05-02'
+    end: '2023-05-31'
+    days: 30
+    credits_count: 1
+    credits_total: 9392.67
+  top_counterparties_by_value:
+  - counterparty: 2911400609
+    direction: credit
+    location: UK
+    count: 12
+    total: 263612.39
+  - counterparty: 8327812626
+    direction: credit
+    location: UK
+    count: 12
+    total: 256996.12
+  - counterparty: 9407248599
+    direction: credit
+    location: UK
+    count: 12
+    total: 237112.92
+  - counterparty: 1140645531
+    direction: credit
+    location: UK
+    count: 12
+    total: 194777.05
+  - counterparty: 6508769495
+    direction: credit
+    location: UK
+    count: 12
+    total: 190298.49
+  watchlist_reference: 'FATF increased monitoring, 23 June 2023 snapshot (simulation watchlist): Albania,
+    Nigeria, Turkey, UAE'
+  other_alerts_on_account: []
+red_flags_identified:
+  - "Burst of credits inconsistent with the profile: 241 credits totalling 2,955,619.38 from 21 senders between 24 and 30 July 2023, against declared income of 10,000–25,000 and expected monthly credits of 833–2,083."
+  - "Repetitive multi-sender pattern: the largest senders each made 12 payments — 2911400609 (263,612.39), 8327812626 (256,996.12), 9407248599 (237,112.92) and 1140645531 (194,777.05), by ACH, cheque and card."
+  - "Sharp change in activity: credits of about 9,000 in May and 26,000 in June 2023 before July credits of about 2.96 million."
+  - "Funds retained: no debits in the alert window; lookback debits total 18,102.33, including 18,053.21 to 5946937708 in May 2023."
+source_of_funds: >
+  Source of funds is unresolved. Credits of 2,955,619.38 arrived from 21 senders within seven
+  days, the main senders each making 12 payments. Neither the senders' relationship to the
+  customer nor the purpose of the payments is evidenced.
+
+  Source of wealth is relevant because the funds received are more than 100 times the upper end of
+  declared annual income; no asset or wealth information is available.
+
+  Investigative actions not evidenced as completed in the case pack: identifying the senders and
+  their relationship to the customer; establishing the purpose of the payments; and confirming
+  whether funds have since been moved on.
+
+  The source of funds and source of wealth cannot be treated as established or verified on the
+  available record.
+screening_adverse_media: >
+  No screening results are available in the simulation dataset; screening outcomes cannot be
+  verified. The synthetic customer profile records PEP No and adverse media No as KYC flags on
+  file; these are profile attributes, not evidence of completed screening or clear results.
+
+  Screening of the customer and material counterparties is not evidenced as completed in the case
+  pack. Parties for assessment: the customer; senders 2911400609, 8327812626, 9407248599 and
+  1140645531; and payee 5946937708. The data contains account identifiers and bank locations but
+  no names, so screening outcomes cannot be verified; adverse-media and PEP checks on material
+  counterparties are also not evidenced as completed.
+
+  No cross-border activity is recorded in the lookback, so no jurisdiction-specific sanctions
+  consideration arises from the transactions themselves.
+rationale: >
+  The material concerns are not resolved on the available record. I suspect the customer is
+  engaged in money laundering, with the account used to collect funds from multiple senders.
+
+  The greatest weight is given to the receipt of 2,955,619.38 from 21 senders within a week, the
+  main senders each making exactly 12 payments, after months of low activity. Repetition of this
+  kind across senders has no visible economic purpose for a care worker's account. The funds were
+  retained at the alert date, so onward movement cannot be assessed.
+
+  Legitimate explanations considered include an inheritance, a property sale and family support. A
+  single-event receipt would not arrive as repeated payments from 21 senders, and none is
+  substantiated.
+
+  Limitations: the transaction currency is unverified; the customer profile is synthetic and is
+  the KYC record against which activity is assessed in this simulation; the jurisdiction watchlist
+  is a single June 2023 snapshot rather than a classification verified for the transaction dates;
+  and the meaning of Sender_account for cash deposits is undocumented. These limitations reduce
+  precision but do not resolve the multi-sender collection pattern on which the suspicion is
+  based.
+
+  I therefore recommend prompt internal disclosure. This is a suspicion, not a finding that
+  criminality is proven; the MLRO decides whether an external SAR is required. The record does not
+  establish a terrorist-financing suspicion or a sanctions match.
+disposition: ESCALATE_SAR
+escalation_decision: >
+  Make a prompt internal disclosure to the nominated officer/MLRO. This is not an L2-only
+  referral. Disclosure summary: 241 credits totalling 2,955,619.38 from 21 senders between 24 and
+  30 July 2023, the main senders each making 12 payments, after credits of about 35,000 in
+  May–June; funds retained.
+
+  Material counterparties to include: 2911400609, 8327812626, 9407248599, 1140645531.
+
+  Follow-up actions, routed alongside the disclosure without delaying it: confirm whether funds
+  have since moved; screen the customer and the counterparties listed. Owner: the TM/L2 team or
+  the MLRO, as determined under the firm's procedure (not available in this simulation).
+
+  The investigator must not tell the customer or counterparties that an internal disclosure has
+  been made or that an investigation is contemplated or being conducted, where that would be
+  likely to prejudice an investigation (POCA s.333A). This is not a blanket bar on customer
+  contact: any request for information is to be agreed with the MLRO or an appropriate specialist
+  and worded neutrally.
+
+  The case pack does not identify a pending transaction requiring a consent decision. If a
+  proposed transaction may constitute a money laundering offence and the firm intends to proceed,
+  the matter is referred to the MLRO, who decides whether a DAML request is required. The
+  investigator does not seek a DAML or restrict or release account activity outside delegated
+  authority.
+
+  Recommend a CDD refresh and customer risk-rating review: the recorded rating of Low and expected
+  monthly credits of 833–2,083 require reassessment against the observed activity. Assign to the
+  CDD/KYC owner with a due date in the restricted remediation tracker; any customer-facing refresh
+  request is assessed first so that it does not disclose the internal report or prejudice an
+  investigation. These actions do not replace the escalation.
+
+  Timing: the project's operational target is internal disclosure on the same working day that
+  suspicion is formed; the statutory requirement, where POCA s.330 applies, is disclosure as soon
+  as is practicable. The simulation contains no record of when suspicion was formed or the
+  disclosure was made, so the disclosure-tracking fields are left null rather than estimated, and
+  case opening and closure dates are not recorded.
+suspicion_formed_at: null
+internal_disclosure_at: null
+disclosure_recipient: null
+referral_evidence: null

@@ -1,0 +1,314 @@
+# Investigation case note: SYNTHETIC DATA, SIMULATED CASE.
+# Pre-filled: facts from investigator-facing data only (alert, synthetic KYC profile,
+# transactions). Amounts are in dataset monetary units (GBP assumed, unverified).
+# Do not edit `evidence`: tests/test_cases.py re-derives it from the source data.
+# Complete the null fields:
+#   date_opened / date_closed: YYYY-MM-DD
+#   red_flags_identified:      list of strings
+#   source_of_funds:           assessment of source of funds / wealth
+#   screening_adverse_media:   sanctions / PEP / adverse-media assessment
+#                              (no screening results exist in the data; the PEP and
+#                              adverse-media values in the evidence are KYC flags on file)
+#   rationale:                 reasoning that supports the disposition
+#   disposition:               CLOSE_NO_FURTHER_ACTION | ESCALATE_L2 | ESCALATE_SAR
+#   escalation_decision:       what is escalated, to whom, and why (or why not)
+# Disclosure tracking (leave null if no internal disclosure is made; never estimate):
+#   suspicion_formed_at:       ISO 8601 date-time, e.g. 2023-02-16T15:30:00
+#   internal_disclosure_at:    ISO 8601 date-time of the internal disclosure
+#   disclosure_recipient:      e.g. Nominated officer / MLRO
+#   referral_evidence:         reference or summary of the evidence supporting the referral
+case_id: CASE-014
+alert_id: TM04-00658
+scenario: TM04 Fan-in (many distinct senders)
+investigator: INV-B
+account_id: 846415821
+alert_date: '2023-03-01'
+date_opened: null
+date_closed: null
+customer_summary: 'Personal Banking, Nurse, declared income/turnover £40k–£60k, expected monthly credits
+  3,333-5,000, account opened 2016-06-20, risk rating Low. KYC flags on file: PEP No, adverse media No.'
+activity_reviewed: '90-day lookback 2022-12-02 to 2023-03-01: 248 credits totalling 2,624,696.87 from
+  22 distinct senders; 105 debits totalling 1,236,464.97 to 32 distinct receivers. Non-UK counterparty
+  locations: Albania 2 txns / 5,083.85, Turkey 2 txns / 7,673.42, USA 12 txns / 54,635.44. Alert window
+  2023-02-23 to 2023-03-01: 240 credits (2,600,743.45), 8 debits (14,868.61). Trigger: 20 distinct senders,
+  credits totalling 2,600,743.45 in 7 days.'
+evidence:
+  amount_unit: dataset monetary units (GBP assumed, unverified)
+  alert:
+    window_start: '2023-02-23'
+    trigger_date: '2023-03-01'
+    trigger_value: 20.0
+    trigger_detail: 20 distinct senders, credits totalling 2,600,743.45 in 7 days
+  customer_profile:
+    segment: Personal Banking
+    occupation_or_sector: Nurse
+    declared_income_or_turnover_band: £40k–£60k
+    expected_monthly_credits_min_gbp: 3333
+    expected_monthly_credits_max_gbp: 5000
+    account_open_date: '2016-06-20'
+    customer_risk_rating: Low
+    pep_flag: false
+    adverse_media_flag: false
+  review_period:
+    start: '2022-12-02'
+    end: '2023-03-01'
+    days: 90
+    requested_lookback_days: 90
+    truncated_by_dataset_start: false
+  lookback_activity:
+    transactions: 353
+    credits_count: 248
+    credits_total: 2624696.87
+    debits_count: 105
+    debits_total: 1236464.97
+    distinct_senders: 22
+    distinct_receivers: 32
+    largest_credit: 38909.69
+    largest_debit: 722325.22
+    first_date: '2022-12-02'
+    last_date: '2023-03-01'
+    by_payment_type:
+      ACH:
+        credits_count: 65
+        credits_total: 711915.22
+        debits_count: 21
+        debits_total: 68216.3
+      Cash Deposit:
+        credits_count: 5
+        credits_total: 9939.03
+        debits_count: 0
+        debits_total: 0.0
+      Cash Withdrawal:
+        credits_count: 0
+        credits_total: 0.0
+        debits_count: 3
+        debits_total: 445.9
+      Cheque:
+        credits_count: 54
+        credits_total: 669443.64
+        debits_count: 28
+        debits_total: 835440.73
+      Credit card:
+        credits_count: 56
+        credits_total: 575525.52
+        debits_count: 32
+        debits_total: 266875.65
+      Cross-border:
+        credits_count: 12
+        credits_total: 54635.44
+        debits_count: 4
+        debits_total: 12757.27
+      Debit card:
+        credits_count: 56
+        credits_total: 603238.02
+        debits_count: 17
+        debits_total: 52729.12
+    counterparty_locations:
+      Albania:
+        count: 2
+        total: 5083.85
+      Turkey:
+        count: 2
+        total: 7673.42
+      UK:
+        count: 337
+        total: 3793769.13
+      USA:
+        count: 12
+        total: 54635.44
+    watchlist_counterparty_count: 4
+    watchlist_counterparty_total: 12757.27
+    non_gbp_currency_transactions: 20
+  alert_window_activity:
+    transactions: 248
+    credits_count: 240
+    credits_total: 2600743.45
+    debits_count: 8
+    debits_total: 14868.61
+    distinct_senders: 20
+    distinct_receivers: 7
+    largest_credit: 38909.69
+    largest_debit: 4149.17
+    first_date: '2023-02-23'
+    last_date: '2023-03-01'
+    by_payment_type:
+      ACH:
+        credits_count: 64
+        credits_total: 707197.11
+        debits_count: 2
+        debits_total: 5521.74
+      Cheque:
+        credits_count: 53
+        credits_total: 664827.65
+        debits_count: 0
+        debits_total: 0.0
+      Credit card:
+        credits_count: 55
+        credits_total: 570845.23
+        debits_count: 4
+        debits_total: 5053.47
+      Cross-border:
+        credits_count: 12
+        credits_total: 54635.44
+        debits_count: 0
+        debits_total: 0.0
+      Debit card:
+        credits_count: 56
+        credits_total: 603238.02
+        debits_count: 2
+        debits_total: 4293.4
+    counterparty_locations:
+      UK:
+        count: 236
+        total: 2560976.62
+      USA:
+        count: 12
+        total: 54635.44
+    watchlist_counterparty_count: 0
+    watchlist_counterparty_total: 0.0
+    non_gbp_currency_transactions: 16
+  credits_by_30_day_block:
+  - start: '2023-01-31'
+    end: '2023-03-01'
+    days: 30
+    credits_count: 244
+    credits_total: 2613477.02
+  - start: '2023-01-01'
+    end: '2023-01-30'
+    days: 30
+    credits_count: 1
+    credits_total: 4615.99
+  - start: '2022-12-02'
+    end: '2022-12-31'
+    days: 30
+    credits_count: 3
+    credits_total: 6603.86
+  top_counterparties_by_value:
+  - counterparty: 309496513
+    direction: debit
+    location: UK
+    count: 1
+    total: 722325.22
+  - counterparty: 9506164923
+    direction: credit
+    location: UK
+    count: 12
+    total: 460157.38
+  - counterparty: 1126881594
+    direction: credit
+    location: UK
+    count: 12
+    total: 163555.23
+  - counterparty: 9206605373
+    direction: credit
+    location: UK
+    count: 12
+    total: 160347.27
+  - counterparty: 6762697579
+    direction: credit
+    location: UK
+    count: 12
+    total: 158329.85
+  watchlist_reference: 'FATF increased monitoring, 23 June 2023 snapshot (simulation watchlist): Albania,
+    Nigeria, Turkey, UAE'
+  other_alerts_on_account: []
+red_flags_identified:
+  - "Burst of credits inconsistent with the profile: 240 credits totalling 2,600,743.45 from 20 senders between 23 February and 1 March 2023, against declared income of 40,000–60,000 and expected monthly credits of 3,333–5,000."
+  - "Repetitive multi-sender pattern: the largest senders each made 12 payments — 9506164923 (460,157.38), 1126881594 (163,555.23), 9206605373 (160,347.27) and 6762697579 (158,329.85); this includes 12 cross-border credits totalling 54,635.44 from a USA-located sender."
+  - "Large outflows before the burst with no visible funding: December–January debits of about 1.13 million, including a cheque of 722,325.22 to 309496513 and a payment of 140,280.32 to 2265725330, while December–January credits were about 11,000."
+  - "Watchlist-jurisdiction debits: 2 to an Albania-located recipient (5,083.85) and 2 to a Turkey-located recipient (7,673.42)."
+source_of_funds: >
+  Source of funds is unresolved. Credits of 2,600,743.45 arrived from 20 senders within a week,
+  the main senders each making 12 payments. December–January outflows of about 1.13 million were
+  paid before these credits arrived, from money not visible in the case pack.
+
+  Source of wealth is relevant because the activity is more than 40 times the upper end of
+  declared annual income; no asset or wealth information is available.
+
+  Investigative actions not evidenced as completed in the case pack: identifying the senders and
+  their relationship to the customer; establishing the purpose of the payments to 309496513 and
+  2265725330; and obtaining the balance and earlier history.
+
+  The source of funds and source of wealth cannot be treated as established or verified on the
+  available record.
+screening_adverse_media: >
+  No screening results are available in the simulation dataset; screening outcomes cannot be
+  verified. The synthetic customer profile records PEP No and adverse media No as KYC flags on
+  file; these are profile attributes, not evidence of completed screening or clear results.
+
+  Screening of the customer and material counterparties is not evidenced as completed in the case
+  pack. Parties for assessment: the customer; senders 9506164923, 1126881594, 9206605373 and
+  6762697579; the USA-located sender; payees 309496513 and 2265725330; and the Albania-located and
+  Turkey-located recipients. The data contains account identifiers and bank locations but no
+  names, so screening outcomes cannot be verified; adverse-media and PEP checks on material
+  counterparties are also not evidenced as completed.
+
+  The cross-border activity raises a sanctions-control consideration. The available evidence does
+  not establish any sanctions match or connection to a sanctioned person or entity. Appearance on
+  the project's historical June 2023 jurisdiction watchlist is not, by itself, evidence of a
+  sanctions match.
+rationale: >
+  The material concerns are not resolved on the available record. I suspect the customer is
+  engaged in money laundering, with the account used both to pay out large sums and to collect
+  funds from multiple senders.
+
+  The greatest weight is given to the receipt of 2,600,743.45 from 20 senders within a week, the
+  main senders each making 12 payments, and to the earlier outflows of about 1.13 million
+  (including a single cheque of 722,325.22) funded from money not visible. The small payments to
+  Albania-located and Turkey-located recipients provide context only.
+
+  Legitimate explanations considered include an asset sale, investment redemptions and transfers
+  between own accounts. None explains repeated payments from 20 senders, and none is
+  substantiated.
+
+  Limitations: the transaction currency is unverified; the customer profile is synthetic and is
+  the KYC record against which activity is assessed in this simulation; the jurisdiction watchlist
+  is a single June 2023 snapshot rather than a classification verified for the transaction dates;
+  and the meaning of Sender_account for cash deposits is undocumented. These limitations reduce
+  precision but do not resolve the multi-sender pattern and unexplained outflows on which the
+  suspicion is based.
+
+  I therefore recommend prompt internal disclosure. This is a suspicion, not a finding that
+  criminality is proven; the MLRO decides whether an external SAR is required. The record does not
+  establish a terrorist-financing suspicion or a sanctions match.
+disposition: ESCALATE_SAR
+escalation_decision: >
+  Make a prompt internal disclosure to the nominated officer/MLRO. This is not an L2-only
+  referral. Disclosure summary: 240 credits totalling 2,600,743.45 from 20 senders between 23
+  February and 1 March 2023, the main senders each making 12 payments; December–January outflows
+  of about 1.13 million, including 722,325.22 to 309496513, funded from money not visible.
+
+  Material counterparties to include: 9506164923, 1126881594, 9206605373, 6762697579, 309496513,
+  2265725330.
+
+  Follow-up actions, routed alongside the disclosure without delaying it: obtain balance and
+  history before 2022-12-02; screen the customer and the counterparties listed. Owner: the TM/L2
+  team or the MLRO, as determined under the firm's procedure (not available in this simulation).
+
+  The investigator must not tell the customer or counterparties that an internal disclosure has
+  been made or that an investigation is contemplated or being conducted, where that would be
+  likely to prejudice an investigation (POCA s.333A). This is not a blanket bar on customer
+  contact: any request for information is to be agreed with the MLRO or an appropriate specialist
+  and worded neutrally.
+
+  The case pack does not identify a pending transaction requiring a consent decision. If a
+  proposed transaction may constitute a money laundering offence and the firm intends to proceed,
+  the matter is referred to the MLRO, who decides whether a DAML request is required. The
+  investigator does not seek a DAML or restrict or release account activity outside delegated
+  authority.
+
+  Recommend a CDD refresh and customer risk-rating review: the recorded rating of Low and expected
+  monthly credits of 3,333–5,000 require reassessment against the observed activity. Assign to the
+  CDD/KYC owner with a due date in the restricted remediation tracker; any customer-facing refresh
+  request is assessed first so that it does not disclose the internal report or prejudice an
+  investigation. These actions do not replace the escalation.
+
+  Timing: the project's operational target is internal disclosure on the same working day that
+  suspicion is formed; the statutory requirement, where POCA s.330 applies, is disclosure as soon
+  as is practicable. The simulation contains no record of when suspicion was formed or the
+  disclosure was made, so the disclosure-tracking fields are left null rather than estimated, and
+  case opening and closure dates are not recorded.
+suspicion_formed_at: null
+internal_disclosure_at: null
+disclosure_recipient: null
+referral_evidence: null

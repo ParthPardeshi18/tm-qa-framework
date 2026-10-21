@@ -1,0 +1,18 @@
+typology,laundering_txns,monitored_txns,covered_txns,coverage_pct,detected,scenarios
+Smurfing,932,932,225,24.1,True,"TM01, TM03, TM06"
+Over-Invoicing,54,54,4,7.4,True,"TM03, TM06"
+Cycle,382,355,26,6.8,True,"TM02, TM03, TM06"
+Single_large,250,249,16,6.4,True,"TM02, TM03"
+Behavioural_Change_2,345,345,11,3.2,True,TM02
+Layered_Fan_In,656,656,20,3.0,True,"TM02, TM03, TM04"
+Behavioural_Change_1,394,394,8,2.0,True,"TM02, TM03"
+Stacked Bipartite,506,503,8,1.6,True,"TM03, TM04"
+Structuring,1870,1807,27,1.4,True,"TM02, TM03, TM04, TM06"
+Bipartite,383,378,4,1.0,True,"TM03, TM04"
+Deposit-Send,945,945,8,0.8,True,"TM02, TM03"
+Fan_In,364,364,3,0.8,True,TM03
+Fan_Out,237,230,2,0.8,True,"TM02, TM03"
+Cash_Withdrawal,1334,1334,8,0.6,True,"TM04, TM06"
+Scatter-Gather,338,316,2,0.6,True,TM03
+Layered_Fan_Out,529,528,2,0.4,True,TM03
+Gather-Scatter,354,354,1,0.3,True,TM03

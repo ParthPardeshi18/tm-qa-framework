@@ -1,0 +1,303 @@
+# Investigation case note: SYNTHETIC DATA, SIMULATED CASE.
+# Pre-filled: facts from investigator-facing data only (alert, synthetic KYC profile,
+# transactions). Amounts are in dataset monetary units (GBP assumed, unverified).
+# Do not edit `evidence`: tests/test_cases.py re-derives it from the source data.
+# Complete the null fields:
+#   date_opened / date_closed: YYYY-MM-DD
+#   red_flags_identified:      list of strings
+#   source_of_funds:           assessment of source of funds / wealth
+#   screening_adverse_media:   sanctions / PEP / adverse-media assessment
+#                              (no screening results exist in the data; the PEP and
+#                              adverse-media values in the evidence are KYC flags on file)
+#   rationale:                 reasoning that supports the disposition
+#   disposition:               CLOSE_NO_FURTHER_ACTION | ESCALATE_L2 | ESCALATE_SAR
+#   escalation_decision:       what is escalated, to whom, and why (or why not)
+# Disclosure tracking (leave null if no internal disclosure is made; never estimate):
+#   suspicion_formed_at:       ISO 8601 date-time, e.g. 2023-02-16T15:30:00
+#   internal_disclosure_at:    ISO 8601 date-time of the internal disclosure
+#   disclosure_recipient:      e.g. Nominated officer / MLRO
+#   referral_evidence:         reference or summary of the evidence supporting the referral
+case_id: CASE-005
+alert_id: TM02-00194
+scenario: TM02 Rapid movement of funds
+investigator: INV-B
+account_id: 3285069241
+alert_date: '2022-11-30'
+date_opened: null
+date_closed: null
+customer_summary: 'Personal Banking, Retail assistant, declared income/turnover £10k–£25k, expected monthly
+  credits 833-2,083, account opened 2008-04-03, risk rating Low. KYC flags on file: PEP No, adverse media
+  No.'
+activity_reviewed: '55-day lookback 2022-10-07 to 2022-11-30 (lookback cut short by the dataset start):
+  2 credits totalling 585,522.72 from 2 distinct senders; 143 debits totalling 1,110,487.02 to 12 distinct
+  receivers. Non-UK counterparty locations: Morocco 13 txns / 127,070.44, UAE 13 txns / 114,917.54. Alert
+  window 2022-11-29 to 2022-11-30: 1 credits (567,203.88), 130 debits (1,036,017.91). Trigger: credits
+  567,203.88 and debits 1,036,017.91 (183%) within 2 days.'
+evidence:
+  amount_unit: dataset monetary units (GBP assumed, unverified)
+  alert:
+    window_start: '2022-11-29'
+    trigger_date: '2022-11-30'
+    trigger_value: 1.8265
+    trigger_detail: credits 567,203.88 and debits 1,036,017.91 (183%) within 2 days
+  customer_profile:
+    segment: Personal Banking
+    occupation_or_sector: Retail assistant
+    declared_income_or_turnover_band: £10k–£25k
+    expected_monthly_credits_min_gbp: 833
+    expected_monthly_credits_max_gbp: 2083
+    account_open_date: '2008-04-03'
+    customer_risk_rating: Low
+    pep_flag: false
+    adverse_media_flag: false
+  review_period:
+    start: '2022-10-07'
+    end: '2022-11-30'
+    days: 55
+    requested_lookback_days: 90
+    truncated_by_dataset_start: true
+  lookback_activity:
+    transactions: 145
+    credits_count: 2
+    credits_total: 585522.72
+    debits_count: 143
+    debits_total: 1110487.02
+    distinct_senders: 2
+    distinct_receivers: 12
+    largest_credit: 567203.88
+    largest_debit: 18300.5
+    first_date: '2022-10-09'
+    last_date: '2022-11-30'
+    by_payment_type:
+      ACH:
+        credits_count: 1
+        credits_total: 18318.84
+        debits_count: 27
+        debits_total: 196625.68
+      Cheque:
+        credits_count: 0
+        credits_total: 0.0
+        debits_count: 28
+        debits_total: 215111.07
+      Credit card:
+        credits_count: 1
+        credits_total: 567203.88
+        debits_count: 27
+        debits_total: 199709.01
+      Cross-border:
+        credits_count: 0
+        credits_total: 0.0
+        debits_count: 26
+        debits_total: 241987.98
+      Debit card:
+        credits_count: 0
+        credits_total: 0.0
+        debits_count: 35
+        debits_total: 257053.28
+    counterparty_locations:
+      Morocco:
+        count: 13
+        total: 127070.44
+      UAE:
+        count: 13
+        total: 114917.54
+      UK:
+        count: 119
+        total: 1454021.76
+    watchlist_counterparty_count: 13
+    watchlist_counterparty_total: 114917.54
+    non_gbp_currency_transactions: 28
+  alert_window_activity:
+    transactions: 131
+    credits_count: 1
+    credits_total: 567203.88
+    debits_count: 130
+    debits_total: 1036017.91
+    distinct_senders: 1
+    distinct_receivers: 10
+    largest_credit: 567203.88
+    largest_debit: 17012.82
+    first_date: '2022-11-30'
+    last_date: '2022-11-30'
+    by_payment_type:
+      ACH:
+        credits_count: 0
+        credits_total: 0.0
+        debits_count: 24
+        debits_total: 168851.3
+      Cheque:
+        credits_count: 0
+        credits_total: 0.0
+        debits_count: 26
+        debits_total: 205759.52
+      Credit card:
+        credits_count: 1
+        credits_total: 567203.88
+        debits_count: 25
+        debits_total: 190368.87
+      Cross-border:
+        credits_count: 0
+        credits_total: 0.0
+        debits_count: 26
+        debits_total: 241987.98
+      Debit card:
+        credits_count: 0
+        credits_total: 0.0
+        debits_count: 29
+        debits_total: 229050.24
+    counterparty_locations:
+      Morocco:
+        count: 13
+        total: 127070.44
+      UAE:
+        count: 13
+        total: 114917.54
+      UK:
+        count: 105
+        total: 1361233.81
+    watchlist_counterparty_count: 13
+    watchlist_counterparty_total: 114917.54
+    non_gbp_currency_transactions: 28
+  credits_by_30_day_block:
+  - start: '2022-11-01'
+    end: '2022-11-30'
+    days: 30
+    credits_count: 2
+    credits_total: 585522.72
+  - start: '2022-10-07'
+    end: '2022-10-31'
+    days: 25
+    credits_count: 0
+    credits_total: 0.0
+  top_counterparties_by_value:
+  - counterparty: 6977632717
+    direction: credit
+    location: UK
+    count: 1
+    total: 567203.88
+  - counterparty: 6342888860
+    direction: debit
+    location: UK
+    count: 13
+    total: 219471.04
+  - counterparty: 6982635073
+    direction: debit
+    location: UK
+    count: 13
+    total: 128776.78
+  - counterparty: 5062584916
+    direction: debit
+    location: Morocco
+    count: 13
+    total: 127070.44
+  - counterparty: 460153892
+    direction: debit
+    location: UAE
+    count: 13
+    total: 114917.54
+  watchlist_reference: 'FATF increased monitoring, 23 June 2023 snapshot (simulation watchlist): Albania,
+    Nigeria, Turkey, UAE'
+  other_alerts_on_account: []
+red_flags_identified:
+  - "Single large credit followed by rapid dispersal: a credit-card credit of 567,203.88 from 6977632717 and 130 debits totalling 1,036,017.91 to 10 receivers within 29–30 November 2022."
+  - "Activity materially inconsistent with the profile: credits of 585,522.72 and debits of 1,110,487.02 in the available lookback against declared income of 10,000–25,000 and expected monthly credits of 833–2,083."
+  - "Recurring cross-border outflows: 13 debits to a Morocco-located recipient (5062584916, 127,070.44) and 13 to a UAE-located recipient (460153892, 114,917.54); UAE is on the project's historical watchlist."
+  - "Repeat domestic payees: 6342888860 (13 debits, 219,471.04) and 6982635073 (13 debits, 128,776.78)."
+  - "Funding gap: debits exceed credits by 524,964.30. Opening balance is unavailable and the lookback is limited to 55 days by the dataset start (2022-10-07)."
+source_of_funds: >
+  Source of funds is unresolved. The account received two credits in the available period:
+  567,203.88 by credit card from 6977632717 and 18,318.84 by ACH. Neither is consistent with the
+  declared occupation, and the funds behind debits that exceed credits by 524,964.30 are not
+  visible.
+
+  Source of wealth is relevant because more than 1.1 million left the account in 55 days against
+  declared annual income of 10,000–25,000; no asset or wealth information is available.
+
+  Investigative actions not evidenced as completed in the case pack: establishing the source and
+  purpose of the 567,203.88 credit; establishing the purpose of the repeated payments to the four
+  main payees; and obtaining the balance and history before the dataset start.
+
+  The source of funds and source of wealth cannot be treated as established or verified on the
+  available record.
+screening_adverse_media: >
+  No screening results are available in the simulation dataset; screening outcomes cannot be
+  verified. The synthetic customer profile records PEP No and adverse media No as KYC flags on
+  file; these are profile attributes, not evidence of completed screening or clear results.
+
+  Screening of the customer and material counterparties is not evidenced as completed in the case
+  pack. Parties for assessment: the customer; sender 6977632717; payees 6342888860 and 6982635073;
+  the Morocco-located recipient 5062584916; and the UAE-located recipient 460153892. The data
+  contains account identifiers and bank locations but no names, so screening outcomes cannot be
+  verified; adverse-media and PEP checks on material counterparties are also not evidenced as
+  completed.
+
+  The cross-border activity raises a sanctions-control consideration. The available evidence does
+  not establish any sanctions match or connection to a sanctioned person or entity. Appearance on
+  the project's historical June 2023 jurisdiction watchlist is not, by itself, evidence of a
+  sanctions match.
+rationale: >
+  The material concerns are not resolved on the available record. I suspect the customer is
+  engaged in money laundering, using the account to receive a large sum and immediately
+  redistribute it to domestic and overseas recipients.
+
+  The greatest weight is given to the speed and structure of the movement: 567,203.88 received and
+  1,036,017.91 paid out in 130 debits to 10 receivers within two days, with each of the four
+  largest payees receiving exactly 13 payments, including recipients in Morocco and the UAE.
+  Outflows exceeded the visible credit by more than 468,000, so further unseen funds passed
+  through the account.
+
+  Legitimate explanations considered include a large one-off receipt such as an asset sale. A
+  one-off receipt could explain the credit, but not its immediate dispersal in many repeated
+  payments to the same recipients.
+
+  The lookback is 55 days because the data starts on 2022-10-07; this is a dataset limitation.
+  Limitations: the transaction currency is unverified; the customer profile is synthetic and is
+  the KYC record against which activity is assessed in this simulation; the jurisdiction watchlist
+  is a single June 2023 snapshot rather than a classification verified for the transaction dates;
+  and the meaning of Sender_account for cash deposits is undocumented. These limitations reduce
+  precision but do not resolve the pass-through pattern on which the suspicion is based.
+
+  I therefore recommend prompt internal disclosure. This is a suspicion, not a finding that
+  criminality is proven; the MLRO decides whether an external SAR is required. The record does not
+  establish a terrorist-financing suspicion or a sanctions match.
+disposition: ESCALATE_SAR
+escalation_decision: >
+  Make a prompt internal disclosure to the nominated officer/MLRO. This is not an L2-only
+  referral. Disclosure summary: a credit of 567,203.88 from 6977632717 followed within two days by
+  130 debits totalling 1,036,017.91 to 10 receivers; lookback debits of 1,110,487.02 against
+  credits of 585,522.72; recurring payments to Morocco-located and UAE-located recipients.
+
+  Material counterparties to include: 6977632717, 6342888860, 6982635073, 5062584916 (Morocco),
+  460153892 (UAE).
+
+  Follow-up actions, routed alongside the disclosure without delaying it: obtain balance; screen
+  the customer and the counterparties listed. Owner: the TM/L2 team or the MLRO, as determined
+  under the firm's procedure (not available in this simulation).
+
+  The investigator must not tell the customer or counterparties that an internal disclosure has
+  been made or that an investigation is contemplated or being conducted, where that would be
+  likely to prejudice an investigation (POCA s.333A). This is not a blanket bar on customer
+  contact: any request for information is to be agreed with the MLRO or an appropriate specialist
+  and worded neutrally.
+
+  The case pack does not identify a pending transaction requiring a consent decision. If a
+  proposed transaction may constitute a money laundering offence and the firm intends to proceed,
+  the matter is referred to the MLRO, who decides whether a DAML request is required. The
+  investigator does not seek a DAML or restrict or release account activity outside delegated
+  authority.
+
+  Recommend a CDD refresh and customer risk-rating review: the recorded rating of Low and expected
+  monthly credits of 833–2,083 require reassessment against the observed activity. Assign to the
+  CDD/KYC owner with a due date in the restricted remediation tracker; any customer-facing refresh
+  request is assessed first so that it does not disclose the internal report or prejudice an
+  investigation. These actions do not replace the escalation.
+
+  Timing: the project's operational target is internal disclosure on the same working day that
+  suspicion is formed; the statutory requirement, where POCA s.330 applies, is disclosure as soon
+  as is practicable. The simulation contains no record of when suspicion was formed or the
+  disclosure was made, so the disclosure-tracking fields are left null rather than estimated, and
+  case opening and closure dates are not recorded.
+suspicion_formed_at: null
+internal_disclosure_at: null
+disclosure_recipient: null
+referral_evidence: null

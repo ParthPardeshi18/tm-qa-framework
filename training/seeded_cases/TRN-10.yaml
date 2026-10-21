@@ -1,0 +1,285 @@
+# QA TRAINING COPY - simulation design, not a genuine case note. Synthetic data; prepared with AI assistance.
+# Some copies contain deliberately planted errors. Review blind: do not open training/answer_key/
+# and do not compare against cases/.
+case_id: TRN-10
+alert_id: TM01-00264
+scenario: TM01 Structuring (repeated cash deposits)
+investigator: INV-C
+account_id: 8020264563
+alert_date: '2023-05-19'
+date_opened: null
+date_closed: null
+customer_summary: 'Personal Banking, Electrician, declared income/turnover £25k–£40k, expected monthly
+  credits 2,083-3,333, account opened 2019-06-17, risk rating Low. KYC flags on file: PEP No, adverse
+  media No.'
+activity_reviewed: '90-day lookback 2023-02-19 to 2023-05-19: 17 credits totalling 98,579.01 from 3 distinct
+  senders; 73 debits totalling 473,288.78 to 28 distinct receivers. Non-UK counterparty locations: France
+  8 txns / 137,934.20, Germany 2 txns / 39,543.83, Turkey 1 txns / 9,716.44. Alert window 2023-05-13 to
+  2023-05-19: 7 credits (23,557.25), 4 debits (56,065.82). Trigger: 3 cash deposits of 3,000-<6,000 totalling
+  14,949.18 in 7 days.'
+evidence:
+  amount_unit: dataset monetary units (GBP assumed, unverified)
+  alert:
+    window_start: '2023-05-13'
+    trigger_date: '2023-05-19'
+    trigger_value: 3.0
+    trigger_detail: 3 cash deposits of 3,000-<6,000 totalling 14,949.18 in 7 days
+  customer_profile:
+    segment: Personal Banking
+    occupation_or_sector: Electrician
+    declared_income_or_turnover_band: £25k–£40k
+    expected_monthly_credits_min_gbp: 2083
+    expected_monthly_credits_max_gbp: 3333
+    account_open_date: '2019-06-17'
+    customer_risk_rating: Low
+    pep_flag: false
+    adverse_media_flag: false
+  review_period:
+    start: '2023-02-19'
+    end: '2023-05-19'
+    days: 90
+    requested_lookback_days: 90
+    truncated_by_dataset_start: false
+  lookback_activity:
+    transactions: 90
+    credits_count: 17
+    credits_total: 98579.01
+    debits_count: 73
+    debits_total: 473288.78
+    distinct_senders: 3
+    distinct_receivers: 28
+    largest_credit: 46431.56
+    largest_debit: 46275.38
+    first_date: '2023-02-19'
+    last_date: '2023-05-19'
+    by_payment_type:
+      Cash Deposit:
+        credits_count: 16
+        credits_total: 52147.45
+        debits_count: 0
+        debits_total: 0.0
+      Cheque:
+        credits_count: 1
+        credits_total: 46431.56
+        debits_count: 1
+        debits_total: 46275.38
+      Cross-border:
+        credits_count: 0
+        credits_total: 0.0
+        debits_count: 72
+        debits_total: 427013.4
+    counterparty_locations:
+      France:
+        count: 8
+        total: 137934.2
+      Germany:
+        count: 2
+        total: 39543.83
+      Turkey:
+        count: 1
+        total: 9716.44
+      UK:
+        count: 79
+        total: 384673.32
+    watchlist_counterparty_count: 1
+    watchlist_counterparty_total: 9716.44
+    non_gbp_currency_transactions: 72
+  alert_window_activity:
+    transactions: 11
+    credits_count: 7
+    credits_total: 23557.25
+    debits_count: 4
+    debits_total: 56065.82
+    distinct_senders: 2
+    distinct_receivers: 3
+    largest_credit: 5771.28
+    largest_debit: 27316.17
+    first_date: '2023-05-14'
+    last_date: '2023-05-19'
+    by_payment_type:
+      Cash Deposit:
+        credits_count: 7
+        credits_total: 23557.25
+        debits_count: 0
+        debits_total: 0.0
+      Cross-border:
+        credits_count: 0
+        credits_total: 0.0
+        debits_count: 4
+        debits_total: 56065.82
+    counterparty_locations:
+      Germany:
+        count: 1
+        total: 23620.21
+      UK:
+        count: 10
+        total: 56002.86
+    watchlist_counterparty_count: 0
+    watchlist_counterparty_total: 0.0
+    non_gbp_currency_transactions: 4
+  credits_by_30_day_block:
+  - start: '2023-04-20'
+    end: '2023-05-19'
+    days: 30
+    credits_count: 10
+    credits_total: 32993.7
+  - start: '2023-03-21'
+    end: '2023-04-19'
+    days: 30
+    credits_count: 1
+    credits_total: 46431.56
+  - start: '2023-02-19'
+    end: '2023-03-20'
+    days: 30
+    credits_count: 6
+    credits_total: 19153.75
+  top_counterparties_by_value:
+  - counterparty: 5861366553
+    direction: debit
+    location: France
+    count: 8
+    total: 137934.2
+  - counterparty: 4219885901
+    direction: debit
+    location: UK
+    count: 6
+    total: 97454.95
+  - counterparty: 7890110062
+    direction: credit
+    location: UK
+    count: 1
+    total: 46431.56
+  - counterparty: 7890110062
+    direction: debit
+    location: UK
+    count: 1
+    total: 46275.38
+  - counterparty: 9634559331
+    direction: credit
+    location: UK
+    count: 13
+    total: 40454.56
+  watchlist_reference: 'FATF increased monitoring, 23 June 2023 snapshot (simulation watchlist): Albania,
+    Nigeria, Turkey, UAE'
+  other_alerts_on_account: []
+red_flags_identified:
+- 'Outflows materially inconsistent with the profile: 73 debits totalling 473,288.78 to 28 receivers in
+  the 90-day lookback against declared income of 25,000–40,000 and expected monthly credits of 2,083–3,333.'
+- 'Repeated cash deposits beyond declared income: 16 cash deposits totalling 52,147.45 (per transaction-level
+  review), 13 recorded against identifier 9634559331 (40,454.56) and 3 against 7345520483 (11,692.89),
+  including runs on consecutive days in March and May 2023. The TM01 trigger comprised 3 in-band deposits
+  totalling 14,949.18 in the week to 19 May 2023.'
+- 'Matching cheques in and out: a cheque credit of 46,431.56 from 7890110062 and a cheque debit of 46,275.38
+  to the same identifier within the review period.'
+- 'Cross-border outflows: 72 cross-border debits totalling 427,013.40, including 8 to a France-located
+  recipient (5861366553, 137,934.20), 2 to Germany-located recipients (39,543.83), 1 to a Turkey-located
+  recipient (9,716.44) and 61 to UK-located receivers (239,818.93).'
+- 'Account recorded under two bank locations (per transaction-level review): the 72 cross-border debits
+  record the account at a UAE bank location, while its credits and remaining debit record it at a UK bank.
+  This may be a data-quality issue and needs confirmation before reliance.'
+- 'Funding gap: debits exceed credits (98,579.01) by 374,709.77. Opening balance is unavailable and the
+  investigator data contains no activity before 2023-02-19.'
+source_of_funds: 'Source of funds is unresolved. Recorded credits comprise 16 cash deposits (52,147.45)
+  and one cheque (46,431.56). Cash income is plausible in type for an electrician, but 52,147.45 in 90
+  days exceeds the customer''s declared annual income. The cheque credit is matched by a cheque debit
+  of 46,275.38 to the same counterparty, so it does not explain the wider outflows. The funds behind debits
+  that exceed credits by 374,709.77 are not visible.
+
+  Source of wealth is relevant because the recorded outflows are more than ten times the declared annual
+  income; no asset or wealth information is available.
+
+  Investigative actions not evidenced as completed in the case pack: establishing the origin of the cash
+  deposits and the identity behind identifiers 9634559331 and 7345520483; establishing the purpose of
+  the matched cheques with 7890110062; confirming whether the UAE-located debits belong to this customer;
+  and obtaining the balance and earlier history.
+
+  The source of funds and source of wealth cannot be treated as established or verified on the available
+  record.
+
+  '
+screening_adverse_media: 'No screening results are available in the simulation dataset; screening outcomes
+  cannot be verified. The synthetic customer profile records PEP No and adverse media No as KYC flags
+  on file; these are profile attributes, not evidence of completed screening or clear results.
+
+  Screening of the customer and material counterparties is not evidenced as completed in the case pack.
+  Parties for assessment: the customer; cash-deposit identifiers 9634559331 and 7345520483; cheque counterparty
+  7890110062; the France-located recipient 5861366553; receiver 4219885901 (6 debits, 97,454.95); and
+  the Germany-located and Turkey-located recipients. The data contains account identifiers and bank locations
+  but no names, so screening outcomes cannot be verified; adverse-media and PEP checks on material counterparties
+  are also not evidenced as completed.
+
+  The cross-border activity raises a sanctions-control consideration. The available evidence does not
+  establish any sanctions match or connection to a sanctioned person or entity. Appearance on the project''s
+  historical June 2023 jurisdiction watchlist is not, by itself, evidence of a sanctions match.
+
+  '
+rationale: 'The material concerns are not resolved on the available record. I suspect the customer is
+  engaged in money laundering, using the account to place cash and pass funds on to third parties at a
+  scale far beyond declared means.
+
+  The greatest weight is given to the cash: 16 deposits totalling 52,147.45 in 90 days, mostly against
+  one identifier and in runs of consecutive daily deposits, exceed the declared annual income of 25,000–40,000.
+  The TM01 trigger is part of this wider pattern rather than the basis of the suspicion on its own. The
+  matched cheques (46,431.56 in and 46,275.38 out with the same counterparty) add weight as a possible
+  round-trip with no visible purpose.
+
+  The 72 cross-border debits (427,013.40) are given qualified weight. They record the account at a UAE
+  bank location, which may be a data-quality issue; their attribution is referred for confirmation. Even
+  excluding them, the cash pattern and the matched cheques are unexplained and inconsistent with the profile.
+
+  Legitimate explanations considered include cash trade income, savings and transfers between related
+  accounts. None is substantiated, and cash income of this size is not consistent with the declared income
+  band.
+
+  Limitations: the transaction currency is unverified; the customer profile is synthetic and is the KYC
+  record against which activity is assessed in this simulation; the jurisdiction watchlist is a single
+  June 2023 snapshot rather than a classification verified for the transaction dates; and the meaning
+  of Sender_account for cash deposits is undocumented. These limitations reduce precision but do not resolve
+  the cash and cheque pattern on which the suspicion primarily rests.
+
+  I therefore recommend prompt internal disclosure. This is a suspicion, not a finding that criminality
+  is proven; the MLRO decides whether an external SAR is required. The record does not establish a terrorist-financing
+  suspicion or a sanctions match.
+
+  '
+disposition: ESCALATE_SAR
+escalation_decision: 'Make a prompt internal disclosure to the nominated officer/MLRO. This is not an
+  L2-only referral. Disclosure summary: 16 cash deposits totalling 52,147.45 in 90 days against declared
+  income of 25,000–40,000; matched cheques of 46,431.56 in and 46,275.38 out with 7890110062; debits of
+  473,288.78 against credits of 98,579.01; and 72 cross-border debits (427,013.40) recorded with the account
+  at a UAE bank location, attribution to be confirmed.
+
+  Material counterparties to include: cash identifiers 9634559331 and 7345520483; cheque counterparty
+  7890110062; France-located recipient 5861366553; receiver 4219885901.
+
+  Follow-up actions, routed alongside the disclosure without delaying it: confirm attribution of the UAE-located
+  debits; obtain balance and history before 2023-02-19; screen the customer and the counterparties listed.
+  Owner: the TM/L2 team or the MLRO, as determined under the firm''s procedure (not available in this
+  simulation).
+
+  The investigator must not tell the customer or counterparties that an internal disclosure has been made
+  or that an investigation is contemplated or being conducted, where that would be likely to prejudice
+  an investigation (POCA s.333A). This is not a blanket bar on customer contact: any request for information
+  is to be agreed with the MLRO or an appropriate specialist and worded neutrally.
+
+  The case pack does not identify a pending transaction requiring a consent decision. If a proposed transaction
+  may constitute a money laundering offence and the firm intends to proceed, the matter is referred to
+  the MLRO, who decides whether a DAML request is required. The investigator does not seek a DAML or restrict
+  or release account activity outside delegated authority.
+
+  Recommend a CDD refresh and customer risk-rating review: the recorded rating of Low and expected monthly
+  credits of 2,083–3,333 require reassessment against the observed activity. Assign to the CDD/KYC owner
+  with a due date in the restricted remediation tracker; any customer-facing refresh request is assessed
+  first so that it does not disclose the internal report or prejudice an investigation. These actions
+  do not replace the escalation.
+
+  Timing: the project''s operational target is internal disclosure on the same working day that suspicion
+  is formed; the statutory requirement, where POCA s.330 applies, is disclosure as soon as is practicable.
+  The simulation contains no record of when suspicion was formed or the disclosure was made, so the disclosure-tracking
+  fields are left null rather than estimated, and case opening and closure dates are not recorded.
+
+  '
+suspicion_formed_at: null
+internal_disclosure_at: null
+disclosure_recipient: null
+referral_evidence: null

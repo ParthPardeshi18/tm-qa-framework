@@ -1,0 +1,265 @@
+# QA TRAINING COPY - simulation design, not a genuine case note. Synthetic data; prepared with AI assistance.
+# Some copies contain deliberately planted errors. Review blind: do not open training/answer_key/
+# and do not compare against cases/.
+case_id: TRN-12
+alert_id: TM02-00543
+scenario: TM02 Rapid movement of funds
+investigator: INV-A
+account_id: 8126974238
+alert_date: '2023-02-15'
+date_opened: null
+date_closed: null
+customer_summary: 'Business Banking, Hairdresser, declared income/turnover £0–£50k, expected monthly credits
+  0-4,167, account opened 2011-12-02, risk rating Medium. KYC flags on file: PEP No, adverse media No.'
+activity_reviewed: '90-day lookback 2022-11-18 to 2023-02-15: 138 credits totalling 1,246,835.49 from
+  11 distinct senders; 132 debits totalling 918,596.84 to 11 distinct receivers. Non-UK counterparty locations:
+  none. Alert window 2023-02-14 to 2023-02-15: 5 credits (50,298.00), 5 debits (64,469.49). Trigger: credits
+  50,298.00 and debits 64,469.49 (128%) within 2 days.'
+evidence:
+  amount_unit: dataset monetary units (GBP assumed, unverified)
+  alert:
+    window_start: '2023-02-14'
+    trigger_date: '2023-02-15'
+    trigger_value: 1.2818
+    trigger_detail: credits 50,298.00 and debits 64,469.49 (128%) within 2 days
+  customer_profile:
+    segment: Business Banking
+    occupation_or_sector: Hairdresser
+    declared_income_or_turnover_band: £0–£50k
+    expected_monthly_credits_min_gbp: 0
+    expected_monthly_credits_max_gbp: 4167
+    account_open_date: '2011-12-02'
+    customer_risk_rating: Medium
+    pep_flag: false
+    adverse_media_flag: false
+  review_period:
+    start: '2022-11-18'
+    end: '2023-02-15'
+    days: 90
+    requested_lookback_days: 90
+    truncated_by_dataset_start: false
+  lookback_activity:
+    transactions: 270
+    credits_count: 138
+    credits_total: 1246835.49
+    debits_count: 132
+    debits_total: 918596.84
+    distinct_senders: 11
+    distinct_receivers: 11
+    largest_credit: 20706.4
+    largest_debit: 25231.45
+    first_date: '2022-11-18'
+    last_date: '2023-02-15'
+    by_payment_type:
+      ACH:
+        credits_count: 35
+        credits_total: 305789.67
+        debits_count: 39
+        debits_total: 268817.77
+      Cheque:
+        credits_count: 29
+        credits_total: 239586.46
+        debits_count: 28
+        debits_total: 263318.0
+      Credit card:
+        credits_count: 40
+        credits_total: 368661.61
+        debits_count: 32
+        debits_total: 186072.18
+      Debit card:
+        credits_count: 34
+        credits_total: 332797.75
+        debits_count: 33
+        debits_total: 200388.89
+    counterparty_locations:
+      UK:
+        count: 270
+        total: 2165432.33
+    watchlist_counterparty_count: 0
+    watchlist_counterparty_total: 0.0
+    non_gbp_currency_transactions: 0
+  alert_window_activity:
+    transactions: 10
+    credits_count: 5
+    credits_total: 50298.0
+    debits_count: 5
+    debits_total: 64469.49
+    distinct_senders: 3
+    distinct_receivers: 4
+    largest_credit: 15676.52
+    largest_debit: 25231.45
+    first_date: '2023-02-14'
+    last_date: '2023-02-15'
+    by_payment_type:
+      ACH:
+        credits_count: 1
+        credits_total: 6160.08
+        debits_count: 0
+        debits_total: 0.0
+      Cheque:
+        credits_count: 1
+        credits_total: 11749.05
+        debits_count: 2
+        debits_total: 32993.21
+      Credit card:
+        credits_count: 0
+        credits_total: 0.0
+        debits_count: 1
+        debits_total: 13405.01
+      Debit card:
+        credits_count: 3
+        credits_total: 32388.87
+        debits_count: 2
+        debits_total: 18071.27
+    counterparty_locations:
+      UK:
+        count: 10
+        total: 114767.49
+    watchlist_counterparty_count: 0
+    watchlist_counterparty_total: 0.0
+    non_gbp_currency_transactions: 0
+  credits_by_30_day_block:
+  - start: '2023-01-17'
+    end: '2023-02-15'
+    days: 30
+    credits_count: 51
+    credits_total: 433607.04
+  - start: '2022-12-18'
+    end: '2023-01-16'
+    days: 30
+    credits_count: 43
+    credits_total: 356540.98
+  - start: '2022-11-18'
+    end: '2022-12-17'
+    days: 30
+    credits_count: 44
+    credits_total: 456687.47
+  top_counterparties_by_value:
+  - counterparty: 9747504007
+    direction: credit
+    location: UK
+    count: 23
+    total: 356824.82
+  - counterparty: 1085502765
+    direction: credit
+    location: UK
+    count: 24
+    total: 228698.5
+  - counterparty: 3568250923
+    direction: credit
+    location: UK
+    count: 20
+    total: 226577.23
+  - counterparty: 1960345643
+    direction: credit
+    location: UK
+    count: 24
+    total: 223101.65
+  - counterparty: 1960345643
+    direction: debit
+    location: UK
+    count: 18
+    total: 217177.03
+  watchlist_reference: 'FATF increased monitoring, 23 June 2023 snapshot (simulation watchlist): Albania,
+    Nigeria, Turkey, UAE'
+  other_alerts_on_account: []
+red_flags_identified:
+- 'Turnover materially inconsistent with the declared business: 138 credits totalling 1,246,835.49 and
+  132 debits totalling 918,596.84 in the 90-day lookback against declared turnover of 0–50,000 a year
+  (expected monthly credits 0–4,167).'
+- 'Sustained high volume rather than a single burst: credits of about 457k, 357k and 434k in the three
+  30-day blocks.'
+- 'Two-way flows with one counterparty: 1960345643 sent 24 credits totalling 223,101.65 and received 18
+  debits totalling 217,177.03.'
+- 'Concentrated counterparties: 11 senders and 11 receivers; the largest senders were 9747504007 (23 credits,
+  356,824.82), 1085502765 (24, 228,698.50) and 3568250923 (20, 226,577.23); the largest receivers were
+  1960345643 and 6926473983 (19 debits, 171,322.49).'
+- 'TM02 trigger: credits of 50,298.00 and debits of 64,469.49 (128%) on 14–15 February 2023.'
+source_of_funds: 'Source of funds is unresolved. Credits come from 11 domestic counterparties by ACH,
+  cheque and card, at a steady rate over three months, with no cash and no cross-border element. The pattern
+  is consistent in form with business receipts, but the volume (about 1.25 million in 90 days) is far
+  beyond the declared turnover of a hairdressing business, and the nature of the business relationships
+  is not evidenced.
+
+  Source of wealth is relevant to the business''s owners because of the gap between declared and observed
+  turnover; no business accounts or ownership information are available.
+
+  Investigative actions not evidenced as completed in the case pack: establishing the business''s actual
+  activity and turnover; identifying the main counterparties and the reason for two-way flows with 1960345643;
+  and obtaining business records.
+
+  The source of funds and source of wealth cannot be treated as established or verified on the available
+  record.
+
+  '
+screening_adverse_media: 'No screening results are available in the simulation dataset; screening outcomes
+  cannot be verified. The synthetic customer profile records PEP No and adverse media No as KYC flags
+  on file; these are profile attributes, not evidence of completed screening or clear results.
+
+  Screening of the customer and material counterparties is not evidenced as completed in the case pack.
+  Parties for assessment: the customer and its owners or controllers; senders 9747504007, 1085502765 and
+  3568250923; two-way counterparty 1960345643; and receivers 6926473983, 6149643353 and 856923499. The
+  data contains account identifiers and bank locations but no names, so screening outcomes cannot be verified;
+  adverse-media and PEP checks on material counterparties are also not evidenced as completed.
+
+  No cross-border activity is recorded in the lookback, so no jurisdiction-specific sanctions consideration
+  arises from the transactions themselves.
+
+  '
+rationale: 'The material concerns are not resolved, but on the current record they point first to a KYC
+  discrepancy and need specialist assessment before a suspicion can be formed or excluded.
+
+  The greatest weight is given to scale: about 1.25 million of credits in 90 days through a business declared
+  at 0–50,000 a year. The two-way flows with 1960345643 (223,101.65 in, 217,177.03 out) are a material
+  question because circular payments can be used to inflate turnover or layer funds. However, the activity
+  is sustained and regular over three months, domestic, cash-free and spread across a stable group of
+  counterparties, which is consistent with a genuine trading relationship conducted through an account
+  whose KYC is out of date. The TM02 trigger (128% out within two days) is consistent with this steady
+  pattern and is given limited weight.
+
+  Legitimate explanations considered include business growth or a change of activity not reflected in
+  KYC, and supplier-customer relationships producing two-way payments. These remain untested but are not
+  contradicted by the transaction evidence.
+
+  [Correction 2026-10-21: a reference to a later-dated alert, listed in error in the original case pack,
+  was removed; it was not relied upon.] Limitations: the transaction currency is unverified; the customer
+  profile is synthetic and is the KYC record against which activity is assessed in this simulation; the
+  jurisdiction watchlist is a single June 2023 snapshot rather than a classification verified for the
+  transaction dates; and the meaning of Sender_account for cash deposits is undocumented. These limitations
+  reduce precision but do not change the assessment that the key questions are about the nature of the
+  business.
+
+  ESCALATE_L2 is proportionate: L2 should establish the actual business and the reason for the circular
+  flows. If the circular flows cannot be explained, internal disclosure must follow promptly.
+
+  '
+disposition: ESCALATE_L2
+escalation_decision: 'Refer to the L2 Transaction Monitoring team for specialist assessment of: (1) the
+  business''s actual activity and turnover; (2) the relationship with 1960345643 and the reason for two-way
+  flows of 223,101.65 in and 217,177.03 out; (3) the identity of senders 9747504007, 1085502765 and 3568250923;
+  and (4) screening of the customer, its controllers and the main counterparties.
+
+  Internal disclosure is not made at this stage because the sustained, domestic, cash-free pattern across
+  a stable counterparty group is consistent with an under-declared trading business; the circular flows
+  are a material question for specialist review rather than, on their own, grounds for suspicion.
+
+  Any request for information is to be agreed with L2 or the MLRO and worded neutrally; the tipping-off
+  restriction (POCA s.333A) applies if suspicion is later formed.
+
+  Recommend a CDD refresh and customer risk-rating review: the recorded rating of Medium and expected
+  monthly credits of 0–4,167 require reassessment against the observed activity. Assign to the CDD/KYC
+  owner with a due date in the restricted remediation tracker; any customer-facing refresh request is
+  assessed first so that it does not disclose the internal report or prejudice an investigation. These
+  actions do not replace the escalation.
+
+  No internal disclosure is made at this stage, so the disclosure-tracking fields are null. The simulation
+  contains no case-handling record, so opening and closure dates are not recorded. If L2 or any later
+  review forms a suspicion, prompt internal disclosure to the nominated officer/MLRO is required and must
+  not wait for completion of L2 work. The firm''s detailed escalation procedure is not available in this
+  simulation.
+
+  '
+suspicion_formed_at: null
+internal_disclosure_at: null
+disclosure_recipient: null
+referral_evidence: null

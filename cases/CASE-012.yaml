@@ -1,0 +1,223 @@
+# Investigation case note: SYNTHETIC DATA, SIMULATED CASE.
+# Pre-filled: facts from investigator-facing data only (alert, synthetic KYC profile,
+# transactions). Amounts are in dataset monetary units (GBP assumed, unverified).
+# Do not edit `evidence`: tests/test_cases.py re-derives it from the source data.
+# Complete the null fields:
+#   date_opened / date_closed: YYYY-MM-DD
+#   red_flags_identified:      list of strings
+#   source_of_funds:           assessment of source of funds / wealth
+#   screening_adverse_media:   sanctions / PEP / adverse-media assessment
+#                              (no screening results exist in the data; the PEP and
+#                              adverse-media values in the evidence are KYC flags on file)
+#   rationale:                 reasoning that supports the disposition
+#   disposition:               CLOSE_NO_FURTHER_ACTION | ESCALATE_L2 | ESCALATE_SAR
+#   escalation_decision:       what is escalated, to whom, and why (or why not)
+# Disclosure tracking (leave null if no internal disclosure is made; never estimate):
+#   suspicion_formed_at:       ISO 8601 date-time, e.g. 2023-02-16T15:30:00
+#   internal_disclosure_at:    ISO 8601 date-time of the internal disclosure
+#   disclosure_recipient:      e.g. Nominated officer / MLRO
+#   referral_evidence:         reference or summary of the evidence supporting the referral
+case_id: CASE-012
+alert_id: TM03-03634
+scenario: TM03 High-risk jurisdiction exposure
+investigator: INV-C
+account_id: 8880915407
+alert_date: '2023-07-26'
+date_opened: null
+date_closed: null
+customer_summary: 'Personal Banking, Student, declared income/turnover £0–£10k, expected monthly credits
+  0-833, account opened 2022-09-14, risk rating Medium. KYC flags on file: PEP No, adverse media No.'
+activity_reviewed: '90-day lookback 2023-04-28 to 2023-07-26: 13 credits totalling 220,063.45 from 1 distinct
+  senders; 0 debits totalling 0.00 to 0 distinct receivers. Non-UK counterparty locations: Nigeria 13
+  txns / 220,063.45. Alert window 2023-06-27 to 2023-07-26: 13 credits (220,063.45), 0 debits (0.00).
+  Trigger: 13 transactions totalling 220,063.45 with watchlist jurisdictions in 30 days.'
+evidence:
+  amount_unit: dataset monetary units (GBP assumed, unverified)
+  alert:
+    window_start: '2023-06-27'
+    trigger_date: '2023-07-26'
+    trigger_value: 220063.45
+    trigger_detail: 13 transactions totalling 220,063.45 with watchlist jurisdictions in 30 days
+  customer_profile:
+    segment: Personal Banking
+    occupation_or_sector: Student
+    declared_income_or_turnover_band: £0–£10k
+    expected_monthly_credits_min_gbp: 0
+    expected_monthly_credits_max_gbp: 833
+    account_open_date: '2022-09-14'
+    customer_risk_rating: Medium
+    pep_flag: false
+    adverse_media_flag: false
+  review_period:
+    start: '2023-04-28'
+    end: '2023-07-26'
+    days: 90
+    requested_lookback_days: 90
+    truncated_by_dataset_start: false
+  lookback_activity:
+    transactions: 13
+    credits_count: 13
+    credits_total: 220063.45
+    debits_count: 0
+    debits_total: 0.0
+    distinct_senders: 1
+    distinct_receivers: 0
+    largest_credit: 17155.71
+    largest_debit: null
+    first_date: '2023-07-26'
+    last_date: '2023-07-26'
+    by_payment_type:
+      Cross-border:
+        credits_count: 13
+        credits_total: 220063.45
+        debits_count: 0
+        debits_total: 0.0
+    counterparty_locations:
+      Nigeria:
+        count: 13
+        total: 220063.45
+    watchlist_counterparty_count: 13
+    watchlist_counterparty_total: 220063.45
+    non_gbp_currency_transactions: 13
+  alert_window_activity:
+    transactions: 13
+    credits_count: 13
+    credits_total: 220063.45
+    debits_count: 0
+    debits_total: 0.0
+    distinct_senders: 1
+    distinct_receivers: 0
+    largest_credit: 17155.71
+    largest_debit: null
+    first_date: '2023-07-26'
+    last_date: '2023-07-26'
+    by_payment_type:
+      Cross-border:
+        credits_count: 13
+        credits_total: 220063.45
+        debits_count: 0
+        debits_total: 0.0
+    counterparty_locations:
+      Nigeria:
+        count: 13
+        total: 220063.45
+    watchlist_counterparty_count: 13
+    watchlist_counterparty_total: 220063.45
+    non_gbp_currency_transactions: 13
+  credits_by_30_day_block:
+  - start: '2023-06-27'
+    end: '2023-07-26'
+    days: 30
+    credits_count: 13
+    credits_total: 220063.45
+  - start: '2023-05-28'
+    end: '2023-06-26'
+    days: 30
+    credits_count: 0
+    credits_total: 0.0
+  - start: '2023-04-28'
+    end: '2023-05-27'
+    days: 30
+    credits_count: 0
+    credits_total: 0.0
+  top_counterparties_by_value:
+  - counterparty: 7592950832
+    direction: credit
+    location: Nigeria
+    count: 13
+    total: 220063.45
+  watchlist_reference: 'FATF increased monitoring, 23 June 2023 snapshot (simulation watchlist): Albania,
+    Nigeria, Turkey, UAE'
+  other_alerts_on_account: []
+red_flags_identified:
+  - "Inflows materially inconsistent with the profile: 13 cross-border credits totalling 220,063.45 between 27 June and 26 July 2023, against declared income of 0–10,000 and expected monthly credits of 0–833."
+  - "Single overseas source in a watchlist jurisdiction: all 13 credits came from one Nigeria-located sender (7592950832)."
+  - "Recently opened account: opened 2022-09-14; no other credits or debits in the 90-day lookback."
+  - "Funds retained: no outgoing payments during the lookback."
+source_of_funds: >
+  Source of funds is unresolved. All credits came from one overseas sender. A single, regular
+  foreign remitter is consistent in form with family support or education funding for a student,
+  but 220,063.45 in 30 days is far beyond any plausible living or tuition costs implied by the
+  profile, and the sender's identity and relationship to the customer are not evidenced.
+
+  Source of wealth is relevant to the remitter rather than the customer; no information is
+  available about the sender's wealth or the purpose of the payments.
+
+  Investigative actions not evidenced as completed in the case pack: identifying sender 7592950832
+  and their relationship to the customer; establishing the purpose of the payments; and
+  establishing whether further payments or onward transfers have occurred.
+
+  The source of funds and source of wealth cannot be treated as established or verified on the
+  available record.
+screening_adverse_media: >
+  No screening results are available in the simulation dataset; screening outcomes cannot be
+  verified. The synthetic customer profile records PEP No and adverse media No as KYC flags on
+  file; these are profile attributes, not evidence of completed screening or clear results.
+
+  Screening of the customer and material counterparties is not evidenced as completed in the case
+  pack. Parties for assessment: the customer and the Nigeria-located sender 7592950832. The data
+  contains account identifiers and bank locations but no names, so screening outcomes cannot be
+  verified; adverse-media and PEP checks on material counterparties are also not evidenced as
+  completed.
+
+  The cross-border activity raises a sanctions-control consideration. The available evidence does
+  not establish any sanctions match or connection to a sanctioned person or entity. Appearance on
+  the project's historical June 2023 jurisdiction watchlist is not, by itself, evidence of a
+  sanctions match.
+rationale: >
+  The material concerns are not resolved, and the case is borderline, but on the current record I
+  do not yet form a suspicion; specialist assessment is needed to test the most likely legitimate
+  explanation.
+
+  Weight is given to the scale (220,063.45 in 30 days against expected monthly credits of up to
+  833) and to the account's recent opening. The pattern, however, is a single identifiable
+  remitter making regular payments, with no onward movement, dispersal, cash or multi-party
+  activity. That is consistent in form with family or education funding for a student, which
+  counterparty identification and a carefully worded request for information could confirm or
+  exclude. The sender's location on the project's historical watchlist is context, not evidence of
+  suspicion on its own.
+
+  Legitimate explanations considered include family support, tuition or accommodation funding, and
+  the transfer of family savings. None is substantiated, and the amount strains each of them,
+  which is why the case is escalated rather than closed.
+
+  Limitations: the transaction currency is unverified; the customer profile is synthetic and is
+  the KYC record against which activity is assessed in this simulation; the jurisdiction watchlist
+  is a single June 2023 snapshot rather than a classification verified for the transaction dates;
+  and the meaning of Sender_account for cash deposits is undocumented. These limitations reduce
+  precision but do not change the assessment that the decisive evidence is the identity of the
+  remitter and the purpose of the payments.
+
+  ESCALATE_L2 is proportionate. A second reviewer could reasonably conclude that suspicion is
+  already formed; if L2 cannot promptly establish a legitimate purpose, internal disclosure must
+  follow without delay.
+disposition: ESCALATE_L2
+escalation_decision: >
+  Refer to the L2 Transaction Monitoring team for specialist assessment of: (1) the identity of
+  Nigeria-located sender 7592950832 and the relationship to the customer; (2) the purpose of the
+  13 payments totalling 220,063.45; (3) whether the funds have since been moved on; and (4)
+  screening of the customer and the sender.
+
+  Internal disclosure is not made at this stage because the activity is a single identifiable
+  remitter with no onward movement, consistent in form with family or education funding; the
+  evidence needed to test that explanation is not in the case pack. Given the scale, L2 should
+  treat the case as a priority.
+
+  Any request for information is to be agreed with L2 or the MLRO and worded neutrally; the
+  tipping-off restriction (POCA s.333A) applies if suspicion is later formed.
+
+  Recommend a CDD refresh and customer risk-rating review: the recorded rating of Medium and
+  expected monthly credits of 0–833 require reassessment against the observed activity. Assign to
+  the CDD/KYC owner with a due date in the restricted remediation tracker; any customer-facing
+  refresh request is assessed first so that it does not disclose the internal report or prejudice
+  an investigation. These actions do not replace the escalation.
+
+  No internal disclosure is made at this stage, so the disclosure-tracking fields are null. The
+  simulation contains no case-handling record, so opening and closure dates are not recorded. If
+  L2 or any later review forms a suspicion, prompt internal disclosure to the nominated
+  officer/MLRO is required and must not wait for completion of L2 work. The firm's detailed
+  escalation procedure is not available in this simulation.
+suspicion_formed_at: null
+internal_disclosure_at: null
+disclosure_recipient: null
+referral_evidence: null

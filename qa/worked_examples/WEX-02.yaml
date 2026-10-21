@@ -1,0 +1,234 @@
+# ILLUSTRATIVE QA WORKED EXAMPLE - a deliberately flawed variant of CASE-001 (synthetic data).
+# Not part of the 24-case sample, the QA MI or the seeded training set.
+# Prepared with AI assistance; review by the project author is pending.
+# Example: Correct outcome, unsupported investigation
+case_id: WEX-02
+alert_id: TM01-00150
+scenario: TM01 Structuring (repeated cash deposits)
+investigator: INV-X (illustrative)
+account_id: 3205490703
+alert_date: '2023-02-14'
+date_opened: '2023-02-14'
+date_closed: '2023-02-17'
+customer_summary: 'Personal Banking, Retired, declared income/turnover £0–£10k, expected monthly credits
+  0-833, account opened 2005-08-07, risk rating Low. KYC flags on file: PEP No, adverse media No.'
+activity_reviewed: '90-day lookback 2022-11-17 to 2023-02-14: 234 credits totalling 2,996,202.30 from
+  21 distinct senders; 318 debits totalling 3,446,939.33 to 50 distinct receivers. Non-UK counterparty
+  locations: Albania 14 txns / 94,890.04, Italy 14 txns / 159,103.07, Netherlands 13 txns / 252,375.30,
+  Nigeria 2 txns / 380.55, Pakistan 12 txns / 135,473.88, Turkey 2 txns / 65,993.13. Alert window 2023-02-08
+  to 2023-02-14: 3 credits (12,795.02), 7 debits (46,574.82). Trigger: 3 cash deposits of 3,000-<6,000
+  totalling 12,795.02 in 7 days.'
+evidence:
+  amount_unit: dataset monetary units (GBP assumed, unverified)
+  alert:
+    window_start: '2023-02-08'
+    trigger_date: '2023-02-14'
+    trigger_value: 3.0
+    trigger_detail: 3 cash deposits of 3,000-<6,000 totalling 12,795.02 in 7 days
+  customer_profile:
+    segment: Personal Banking
+    occupation_or_sector: Retired
+    declared_income_or_turnover_band: £0–£10k
+    expected_monthly_credits_min_gbp: 0
+    expected_monthly_credits_max_gbp: 833
+    account_open_date: '2005-08-07'
+    customer_risk_rating: Low
+    pep_flag: false
+    adverse_media_flag: false
+  review_period:
+    start: '2022-11-17'
+    end: '2023-02-14'
+    days: 90
+    requested_lookback_days: 90
+    truncated_by_dataset_start: false
+  lookback_activity:
+    transactions: 552
+    credits_count: 234
+    credits_total: 2996202.3
+    debits_count: 318
+    debits_total: 3446939.33
+    distinct_senders: 21
+    distinct_receivers: 50
+    largest_credit: 42416.16
+    largest_debit: 41550.02
+    first_date: '2022-11-17'
+    last_date: '2023-02-14'
+    by_payment_type:
+      ACH:
+        credits_count: 44
+        credits_total: 619756.93
+        debits_count: 62
+        debits_total: 687350.57
+      Cash Deposit:
+        credits_count: 6
+        credits_total: 19679.14
+        debits_count: 0
+        debits_total: 0.0
+      Cash Withdrawal:
+        credits_count: 0
+        credits_total: 0.0
+        debits_count: 3
+        debits_total: 453.72
+      Cheque:
+        credits_count: 66
+        credits_total: 922643.77
+        debits_count: 70
+        debits_total: 743571.15
+      Credit card:
+        credits_count: 62
+        credits_total: 769060.44
+        debits_count: 80
+        debits_total: 720673.4
+      Cross-border:
+        credits_count: 12
+        credits_total: 135473.88
+        debits_count: 45
+        debits_total: 572742.09
+      Debit card:
+        credits_count: 44
+        credits_total: 529588.14
+        debits_count: 58
+        debits_total: 722148.4
+    counterparty_locations:
+      Albania:
+        count: 14
+        total: 94890.04
+      Italy:
+        count: 14
+        total: 159103.07
+      Netherlands:
+        count: 13
+        total: 252375.3
+      Nigeria:
+        count: 2
+        total: 380.55
+      Pakistan:
+        count: 12
+        total: 135473.88
+      Turkey:
+        count: 2
+        total: 65993.13
+      UK:
+        count: 495
+        total: 5734925.66
+    watchlist_counterparty_count: 18
+    watchlist_counterparty_total: 161263.72
+    non_gbp_currency_transactions: 64
+  alert_window_activity:
+    transactions: 10
+    credits_count: 3
+    credits_total: 12795.02
+    debits_count: 7
+    debits_total: 46574.82
+    distinct_senders: 2
+    distinct_receivers: 7
+    largest_credit: 5896.29
+    largest_debit: 22352.35
+    first_date: '2023-02-08'
+    last_date: '2023-02-14'
+    by_payment_type:
+      ACH:
+        credits_count: 0
+        credits_total: 0.0
+        debits_count: 1
+        debits_total: 3811.07
+      Cash Deposit:
+        credits_count: 3
+        credits_total: 12795.02
+        debits_count: 0
+        debits_total: 0.0
+      Cash Withdrawal:
+        credits_count: 0
+        credits_total: 0.0
+        debits_count: 1
+        debits_total: 152.22
+      Cheque:
+        credits_count: 0
+        credits_total: 0.0
+        debits_count: 2
+        debits_total: 6918.77
+      Credit card:
+        credits_count: 0
+        credits_total: 0.0
+        debits_count: 2
+        debits_total: 28383.49
+      Debit card:
+        credits_count: 0
+        credits_total: 0.0
+        debits_count: 1
+        debits_total: 7309.27
+    counterparty_locations:
+      UK:
+        count: 10
+        total: 59369.84
+    watchlist_counterparty_count: 0
+    watchlist_counterparty_total: 0.0
+    non_gbp_currency_transactions: 0
+  credits_by_30_day_block:
+  - start: '2023-01-16'
+    end: '2023-02-14'
+    days: 30
+    credits_count: 3
+    credits_total: 12795.02
+  - start: '2022-12-17'
+    end: '2023-01-15'
+    days: 30
+    credits_count: 230
+    credits_total: 2981759.88
+  - start: '2022-11-17'
+    end: '2022-12-16'
+    days: 30
+    credits_count: 1
+    credits_total: 1647.4
+  top_counterparties_by_value:
+  - counterparty: 7728874438
+    direction: debit
+    location: UK
+    count: 13
+    total: 530738.12
+  - counterparty: 7255191021
+    direction: credit
+    location: UK
+    count: 12
+    total: 504530.14
+  - counterparty: 6775420017
+    direction: debit
+    location: UK
+    count: 13
+    total: 474375.32
+  - counterparty: 8097288482
+    direction: credit
+    location: UK
+    count: 12
+    total: 343048.16
+  - counterparty: 8541211325
+    direction: credit
+    location: UK
+    count: 12
+    total: 293633.95
+  watchlist_reference: 'FATF increased monitoring, 23 June 2023 snapshot (simulation watchlist): Albania,
+    Nigeria, Turkey, UAE'
+  other_alerts_on_account:
+  - alert_id: TM04-00347
+    scenario: TM04
+    trigger_date: '2022-12-26'
+  - alert_id: TM05-00193
+    scenario: TM05
+    trigger_date: '2022-11-17'
+red_flags_identified:
+- Unusual account activity.
+- Cash deposits.
+source_of_funds: 'Not assessed.
+
+  '
+screening_adverse_media: 'No screening results are available in the simulation dataset; screening outcomes
+  cannot be verified. The PEP No and adverse media No values are KYC flags on file, not screening results.
+
+  '
+rationale: 'The activity looks suspicious, so an internal disclosure is made.
+
+  '
+disposition: ESCALATE_SAR
+escalation_decision: 'Internal disclosure to the MLRO.
+
+  '

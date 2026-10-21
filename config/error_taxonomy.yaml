@@ -1,0 +1,88 @@
+# Error taxonomy and QA outcome rules (Phase 4). Synthetic portfolio work.
+
+severities:
+  Critical: {outcome: Fail, scored: true}
+  Major: {outcome: Fail, scored: true}      # Fails even when the disposition is correct
+  Minor: {outcome: Pass with observations, scored: true}
+  Observation: {outcome: none, scored: false}  # Process, template, data or calibration point
+
+# The highest scored severity decides the outcome. No scored findings means Pass.
+outcome_rules:
+  - {if_any: Critical, outcome: Fail}
+  - {if_any: Major, outcome: Fail}
+  - {if_any: Minor, outcome: Pass with observations}
+  - {otherwise: Pass}
+
+# Weighted quality score, for trend MI only.
+#   score = max(floor, base - sum(deduction for each finding's severity))
+# It never overrides the categorical outcome: a Major-finding case scoring 70 is still a Fail,
+# and a Minor-only case that drops to the floor is still Pass with observations. Deductions are
+# illustrative portfolio assumptions; Critical removes the full base. Observations deduct nothing.
+quality_score:
+  base: 100
+  floor: 0
+  deductions: {Critical: 100, Major: 30, Minor: 10, Observation: 0}
+
+error_codes:
+  # Critical
+  OUT-01: {severity: Critical, text: Incorrect outcome}
+  ESC-01: {severity: Critical, text: Required escalation or internal disclosure missed or delayed}
+  SAN-01: {severity: Critical, text: Sanctions exposure not escalated}
+  TIP-01: {severity: Critical, text: Tipping-off risk created or DAML handled outside authority}
+  # Major
+  RF-01: {severity: Major, text: Material red flag not identified}
+  FLW-01: {severity: Major, text: Incoming or outgoing flows or funding not analysed}
+  SOF-01: {severity: Major, text: Source of funds or wealth not considered where required}
+  SCR-01: {severity: Major, text: Screening treated as clear without evidence}
+  RAT-01: {severity: Major, text: Rationale does not support the conclusion}
+  EVD-01: {severity: Major, text: Material evidence gap or reliance on unavailable or look-ahead information}
+  # Minor
+  SCP-01: {severity: Minor, text: Relevant available history not reviewed or not justified}
+  CP-02: {severity: Minor, text: Material counterparties not identified in the escalation summary}
+  ACT-01: {severity: Minor, text: Outstanding action not routed to an owner}
+  CDD-01: {severity: Minor, text: CDD refresh or risk-rating review not recommended where needed}
+  DOC-01: {severity: Minor, text: Non-material documentation or accuracy gap}
+  TML-01: {severity: Minor, text: Timeliness issue within tolerance}
+  # Not scored
+  PRC-01: {severity: Observation, text: Template gap - no field to evidence disclosure timing (v1 template)}
+  PRC-02: {severity: Observation, text: Template defect - case pack lists alerts dated after the case date}
+  PRC-03: {severity: Observation, text: No case-handling or disclosure timestamps in the simulation; timeliness unverifiable}
+  PRC-04: {severity: Observation, text: No escalation procedure in the simulation; follow-up ownership cannot be named precisely}
+  DAT-01: {severity: Observation, text: Data-quality issue affecting the evidence (e.g. account under two bank locations)}
+  CAL-01: {severity: Observation, text: Borderline outcome - rationale documented; independent calibration recommended}
+
+# Who or what a finding is attributed to. QA separates investigator errors from process or
+# template weaknesses and data limitations, so investigators are not penalised for gaps they
+# could not control or for information that does not exist.
+attribution:
+  by_prefix:
+    PRC: Process or template weakness
+    DAT: Data limitation
+    CAL: Calibration point
+  scored: Investigator error     # every scored (Critical, Major, Minor) code
+
+root_causes:
+  - Knowledge gap
+  - Procedure not followed
+  - Procedure unclear
+  - System/data limitation
+  - Time pressure
+  - Not determinable          # Use when one case gives no evidence of cause
+
+remediation:
+  Critical: >
+    Remediate the case itself first: correct the outcome or make the missed disclosure promptly.
+    Then name an owner and due date, give coaching or training, and re-review the investigator's
+    next cases.
+  Major: Remediation action with an owner and due date; targeted coaching; follow-up sample review.
+  Minor: Feedback to the investigator; track themes across reviews.
+  Observation: Assign to the process, template or data owner; no investigator score impact.
+
+appeals:
+  window_working_days: 5     # Portfolio assumption
+  process: >
+    The investigator may appeal a scored finding in writing, citing evidence in the case record.
+    A QA reviewer not involved in the original review decides the appeal. The outcome is Upheld
+    (finding stands) or Overturned (removed or re-graded), with written reasoning, and is logged
+    in qa/appeals.csv. The case's QA outcome is recalculated under outcome_rules.
+  outcomes: [Upheld, Overturned]

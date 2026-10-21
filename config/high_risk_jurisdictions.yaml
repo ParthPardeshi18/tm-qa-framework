@@ -1,0 +1,49 @@
+# TM03 simulation watchlist.
+#
+# A HISTORICAL ANALYTICAL WATCHLIST FOR THIS SIMULATION ONLY. It is not a legal
+# high-risk-country classification (e.g. UK MLR 2017 Schedule 3ZA), not a sanctions
+# list and not a current compliance list. The FATF list changes at every plenary.
+#
+# Source: FATF, "Jurisdictions under Increased Monitoring - 23 June 2023" ("grey list").
+# https://www.fatf-gafi.org/en/publications/High-risk-and-other-monitored-jurisdictions/Increased-monitoring-june-2023.html
+# Retrieved 2026-10-21. The FATF "call for action" (black) list is not included.
+#
+# This one snapshot is applied to the whole SAML-D period (2022-10-07 to 2023-08-23),
+# although the real list changed during that period.
+source: "FATF - Jurisdictions under Increased Monitoring - 23 June 2023"
+snapshot_date: 2023-06-23
+url: "https://www.fatf-gafi.org/en/publications/High-risk-and-other-monitored-jurisdictions/Increased-monitoring-june-2023.html"
+
+jurisdictions:  # names exactly as published by FATF
+  - Albania
+  - Barbados
+  - Burkina Faso
+  - Cameroon
+  - Cayman Islands
+  - Croatia
+  - Democratic Republic of the Congo
+  - Gibraltar
+  - Haiti
+  - Jamaica
+  - Jordan
+  - Mali
+  - Mozambique
+  - Nigeria
+  - Panama
+  - Philippines
+  - Senegal
+  - South Africa
+  - South Sudan
+  - Syria
+  - Tanzania
+  - Türkiye
+  - Uganda
+  - United Arab Emirates
+  - Vietnam
+  - Yemen
+
+# FATF name -> SAML-D bank location value, where the spelling differs.
+# Names not listed here are matched to locations case-insensitively, as-is.
+dataset_name_aliases:
+  Türkiye: Turkey
+  United Arab Emirates: UAE

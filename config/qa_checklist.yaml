@@ -1,0 +1,132 @@
+# QA checklist for TM investigation case notes (Phase 4).
+# Synthetic portfolio work: not a Barclays procedure.
+#
+# Answers: Yes / No / N/A. A "No" raises a finding at severity_if_no, unless the
+# reviewer records why a lower severity applies. Severities and outcome rules are
+# in config/error_taxonomy.yaml.
+#
+# Regulatory references are pointers for the reviewer. Verify the exact provision
+# before citing it.
+
+version: 1
+answers: [Yes, No, N/A]
+
+sections:
+  A:
+    name: Alert and scope
+    questions:
+      A1:
+        text: Was the full triggering activity reviewed?
+        severity_if_no: Major
+      A2:
+        text: >
+          Was an appropriate lookback applied, and was any shortfall documented, whether it
+          came from the dataset start or a scope choice? Was available history relevant to a
+          red flag either reviewed or justified as unnecessary?
+        severity_if_no: Minor
+      A3:
+        text: >
+          Earlier-alert rule: where a prior alert falls within or at the boundary of the review
+          lookback, was its triggering activity reviewed, or was the decision not to review it
+          justified?
+        severity_if_no: Minor
+      A4:
+        text: >
+          Did the note rely only on information available at the case date? Alerts or
+          transactions dated after the case date must not be used.
+        severity_if_no: Major
+  B:
+    name: Customer understanding (CDD)
+    questions:
+      B1:
+        text: Was activity assessed against the customer's profile and expected activity?
+        severity_if_no: Major
+        reference: JMLSG Part I Ch. 5; MLR 2017 reg. 28(11)
+      B2:
+        text: >
+          Was the customer risk rating considered, and was a CDD refresh or risk-rating review
+          recommended where the profile is inconsistent with the activity?
+        severity_if_no: Minor
+        reference: MLR 2017 reg. 28(11)(a)-(b)
+  C:
+    name: Transaction analysis and red flags
+    questions:
+      C1:
+        text: Were all material red flags identified and tied to specific evidence?
+        severity_if_no: Major
+      C2:
+        text: >
+          Were both incoming and outgoing flows analysed, including how outflows were funded
+          and the sequence of credits and debits where relevant?
+        severity_if_no: Major
+      C3:
+        text: >
+          Were material counterparties and jurisdictions identified (account identifiers,
+          direction, counts, totals) and assessed? Watchlist exposure must be treated as
+          context, not proof.
+        severity_if_no: Minor
+  D:
+    name: Source of funds / wealth and screening
+    questions:
+      D1:
+        text: >
+          Was source of funds, and source of wealth where relevant, considered where activity
+          is inconsistent with the profile?
+        severity_if_no: Major
+      D2:
+        text: >
+          Was screening (sanctions, PEP, adverse media) evidenced, or was its absence recorded
+          without being treated as clear? KYC flags on file are not screening results.
+        severity_if_no: Major
+      D3:
+        text: >
+          Was every outstanding action routed to an owner or passed to the MLRO for
+          determination?
+        severity_if_no: Minor
+  E:
+    name: Rationale and outcome
+    questions:
+      E1:
+        text: >
+          Does the rationale reach a conclusion, weigh the evidence proportionately and
+          logically support the disposition?
+        severity_if_no: Major
+      E2:
+        text: Is the outcome correct on the available record?
+        severity_if_no: Critical
+        critical: true
+  F:
+    name: Escalation and SAR
+    questions:
+      F1:
+        text: >
+          Where suspicion was formed, was a prompt internal disclosure to the nominated
+          officer/MLRO made or recommended, without waiting for L2 review?
+        severity_if_no: Critical
+        critical: true
+        reference: POCA 2002 s.330; NCA SAR guidance
+      F2:
+        text: Was any sanctions exposure escalated, where applicable?
+        severity_if_no: Critical
+        critical: true
+        reference: SAMLA 2018 / OFSI guidance
+      F3:
+        text: >
+          Were tipping-off risk and DAML or consent decisions handled within the
+          investigator's authority?
+        severity_if_no: Critical
+        critical: true
+        reference: POCA 2002 s.333A
+  G:
+    name: Documentation and timeliness
+    questions:
+      G1:
+        text: Is the case note clear, evidenced, accurate and internally consistent?
+        severity_if_no: Minor
+      G2:
+        text: >
+          Was the case completed within the 5-working-day target, and was disclosure timing
+          recorded against the same-working-day target? These are portfolio assumptions; the
+          statutory test where POCA s.330 applies is "as soon as is practicable". Missing
+          timestamps make timeliness unverifiable; they do not prove lateness.
+        severity_if_no: Minor

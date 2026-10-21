@@ -1,0 +1,64 @@
+# Transaction monitoring scenario thresholds (Phase 2).
+#
+# CURRENCY: the currency of SAML-D's Amount column is UNVERIFIED (docs/eda_notes.md §10).
+# All monetary thresholds are in dataset monetary units. Amounts are used exactly as
+# recorded, with no FX conversion, whatever Payment_currency says. GBP is assumed only
+# for labelling (e.g. "£3,000"). This has not been confirmed.
+currency_assumption: "Dataset monetary units; GBP assumed for labelling, unverified; no FX conversion"
+
+# Simulated bank: only legs whose own-side bank location is this value are monitored
+# (credits: Receiver_bank_location; debits: Sender_bank_location).
+monitored_bank_location: UK
+
+# Windows: window_days N = the N calendar days ending on the trigger date, inclusive.
+# Comparisons: counts, totals and ratios use >=; amount bands are [min_amount, max_amount).
+
+# Duplicate handling: after an alert for an account+scenario on date D, further
+# triggers for that account+scenario on dates <= D + suppression_days are suppressed.
+suppression_days: 30
+
+# Transaction history exported per alert: trigger_date - (history_lookback_days - 1)
+# to trigger_date (the plan's 90-day lookback). For TM06 this shows the 30-day window
+# and the last 60 of its 90 baseline days; the baseline average is in trigger_detail.
+# 120 days would show the full TM06 baseline but exceeds the <30 MB export target.
+history_lookback_days: 90
+
+scenarios:
+  TM01:
+    name: Structuring (repeated cash deposits)
+    payment_type: Cash Deposit
+    window_days: 7
+    min_amount: 3000     # inclusive
+    max_amount: 6000     # exclusive
+    min_count: 3
+  TM02:
+    name: Rapid movement of funds
+    window_days: 2
+    min_credits: 50000
+    min_debit_ratio: 0.9  # debits in window >= 90% of credits in window
+  TM03:
+    name: High-risk jurisdiction exposure
+    window_days: 30
+    min_total: 150000     # credits + debits with watchlist counterparties
+  TM04:
+    name: Fan-in (many distinct senders)
+    window_days: 7
+    min_distinct_counterparties: 20
+  TM05:
+    name: Fan-out (many distinct receivers)
+    window_days: 7
+    min_distinct_counterparties: 25
+  TM06:
+    name: Behavioural change vs history and profile
+    window_days: 30
+    baseline_days: 90         # immediately before the 30-day window
+    min_baseline_credit_count: 10  # established history: >= 10 credit transactions in the baseline
+    min_ratio: 10             # window credits >= 10x baseline monthly average
+    min_credits: 100000
+    profile_multiple: 2       # AND window credits >= 2x profile expected monthly max
+
+sample:
+  per_scenario: 4
+  labelled_per_scenario: 2   # aim: 2 laundering-labelled windows + 2 not, where available
+  planted_per_scenario: 1    # at most 1 planted-mismatch account per scenario, where available
+  salt: tmqa-sample-v1

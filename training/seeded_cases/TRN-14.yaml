@@ -1,0 +1,298 @@
+# QA TRAINING COPY - simulation design, not a genuine case note. Synthetic data; prepared with AI assistance.
+# Some copies contain deliberately planted errors. Review blind: do not open training/answer_key/
+# and do not compare against cases/.
+case_id: TRN-14
+alert_id: TM01-00261
+scenario: TM01 Structuring (repeated cash deposits)
+investigator: INV-B
+account_id: 9126684178
+alert_date: '2023-05-18'
+date_opened: null
+date_closed: null
+customer_summary: 'Business Banking, Hairdresser, declared income/turnover £0–£50k, expected monthly credits
+  0-4,167, account opened 2011-07-01, risk rating Medium. KYC flags on file: PEP No, adverse media No.'
+activity_reviewed: '90-day lookback 2023-02-18 to 2023-05-18: 6 credits totalling 16,804.17 from 2 distinct
+  senders; 80 debits totalling 256,326.93 to 23 distinct receivers. Non-UK counterparty locations: Nigeria
+  3 txns / 2,304.39, Switzerland 2 txns / 788.61. Alert window 2023-05-12 to 2023-05-18: 4 credits (13,310.11),
+  6 debits (16,956.32). Trigger: 3 cash deposits of 3,000-<6,000 totalling 11,240.06 in 7 days.'
+evidence:
+  amount_unit: dataset monetary units (GBP assumed, unverified)
+  alert:
+    window_start: '2023-05-12'
+    trigger_date: '2023-05-18'
+    trigger_value: 3.0
+    trigger_detail: 3 cash deposits of 3,000-<6,000 totalling 11,240.06 in 7 days
+  customer_profile:
+    segment: Business Banking
+    occupation_or_sector: Hairdresser
+    declared_income_or_turnover_band: £0–£50k
+    expected_monthly_credits_min_gbp: 0
+    expected_monthly_credits_max_gbp: 4167
+    account_open_date: '2011-07-01'
+    customer_risk_rating: Medium
+    pep_flag: false
+    adverse_media_flag: false
+  review_period:
+    start: '2023-02-18'
+    end: '2023-05-18'
+    days: 90
+    requested_lookback_days: 90
+    truncated_by_dataset_start: false
+  lookback_activity:
+    transactions: 86
+    credits_count: 6
+    credits_total: 16804.17
+    debits_count: 80
+    debits_total: 256326.93
+    distinct_senders: 2
+    distinct_receivers: 23
+    largest_credit: 4241.28
+    largest_debit: 14353.24
+    first_date: '2023-02-18'
+    last_date: '2023-05-18'
+    by_payment_type:
+      ACH:
+        credits_count: 0
+        credits_total: 0.0
+        debits_count: 23
+        debits_total: 107948.44
+      Cash Deposit:
+        credits_count: 6
+        credits_total: 16804.17
+        debits_count: 0
+        debits_total: 0.0
+      Cash Withdrawal:
+        credits_count: 0
+        credits_total: 0.0
+        debits_count: 3
+        debits_total: 494.83
+      Cheque:
+        credits_count: 0
+        credits_total: 0.0
+        debits_count: 14
+        debits_total: 44162.63
+      Credit card:
+        credits_count: 0
+        credits_total: 0.0
+        debits_count: 19
+        debits_total: 45099.3
+      Cross-border:
+        credits_count: 0
+        credits_total: 0.0
+        debits_count: 5
+        debits_total: 3093.0
+      Debit card:
+        credits_count: 0
+        credits_total: 0.0
+        debits_count: 16
+        debits_total: 55528.73
+    counterparty_locations:
+      Nigeria:
+        count: 3
+        total: 2304.39
+      Switzerland:
+        count: 2
+        total: 788.61
+      UK:
+        count: 81
+        total: 270038.1
+    watchlist_counterparty_count: 3
+    watchlist_counterparty_total: 2304.39
+    non_gbp_currency_transactions: 6
+  alert_window_activity:
+    transactions: 10
+    credits_count: 4
+    credits_total: 13310.11
+    debits_count: 6
+    debits_total: 16956.32
+    distinct_senders: 1
+    distinct_receivers: 5
+    largest_credit: 4241.28
+    largest_debit: 9576.28
+    first_date: '2023-05-14'
+    last_date: '2023-05-18'
+    by_payment_type:
+      Cash Deposit:
+        credits_count: 4
+        credits_total: 13310.11
+        debits_count: 0
+        debits_total: 0.0
+      Cash Withdrawal:
+        credits_count: 0
+        credits_total: 0.0
+        debits_count: 1
+        debits_total: 136.04
+      Cheque:
+        credits_count: 0
+        credits_total: 0.0
+        debits_count: 1
+        debits_total: 1965.33
+      Credit card:
+        credits_count: 0
+        credits_total: 0.0
+        debits_count: 2
+        debits_total: 3423.83
+      Debit card:
+        credits_count: 0
+        credits_total: 0.0
+        debits_count: 2
+        debits_total: 11431.12
+    counterparty_locations:
+      UK:
+        count: 10
+        total: 30266.43
+    watchlist_counterparty_count: 0
+    watchlist_counterparty_total: 0.0
+    non_gbp_currency_transactions: 0
+  credits_by_30_day_block:
+  - start: '2023-04-19'
+    end: '2023-05-18'
+    days: 30
+    credits_count: 5
+    credits_total: 13900.81
+  - start: '2023-03-20'
+    end: '2023-04-18'
+    days: 30
+    credits_count: 0
+    credits_total: 0.0
+  - start: '2023-02-18'
+    end: '2023-03-19'
+    days: 30
+    credits_count: 1
+    credits_total: 2903.36
+  top_counterparties_by_value:
+  - counterparty: 1797551721
+    direction: debit
+    location: UK
+    count: 7
+    total: 70431.07
+  - counterparty: 9931229430
+    direction: debit
+    location: UK
+    count: 4
+    total: 37188.91
+  - counterparty: 8872648210
+    direction: debit
+    location: UK
+    count: 6
+    total: 25175.27
+  - counterparty: 6722284586
+    direction: debit
+    location: UK
+    count: 3
+    total: 22844.65
+  - counterparty: 1680247748
+    direction: debit
+    location: UK
+    count: 4
+    total: 14797.04
+  watchlist_reference: 'FATF increased monitoring, 23 June 2023 snapshot (simulation watchlist): Albania,
+    Nigeria, Turkey, UAE'
+  other_alerts_on_account: []
+red_flags_identified:
+- 'Outflows materially inconsistent with the declared business: 80 debits totalling 256,326.93 to 23 receivers
+  in the 90-day lookback (about 64k–77k per full month) against declared turnover of 0–50,000 a year and
+  expected monthly credits of 0–4,167.'
+- 'Funding of outflows not visible: the only credits are 6 cash deposits totalling 16,804.17, so debits
+  exceed credits by 239,522.76. Opening balance is unavailable and the investigator data contains no activity
+  before 2023-02-18.'
+- 'Consecutive daily cash deposits triggering TM01 (per transaction-level review): 2,070.05, 3,197.82,
+  4,241.28 and 3,800.96 on 15–18 May 2023 (13,310.11), all recorded against identifier 5469235956; three
+  fell in the 3,000–5,999.99 band (11,240.06). Earlier deposits of 2,903.36 and 590.70 were recorded against
+  identifier 9073614033.'
+- 'Concentrated domestic payees: 1797551721 (7 debits, 70,431.07), 9931229430 (4, 37,188.91), 8872648210
+  (6, 25,175.27) and 6722284586 (3, 22,844.65).'
+- 'Small recurring cross-border payments: 3 debits totalling 2,304.39 to one Nigeria-located recipient
+  (8284454744) on 19 February, 9 April and 3 May 2023, and 2 debits totalling 788.61 to one Switzerland-located
+  recipient (9478434202).'
+source_of_funds: 'Source of funds is unresolved. In the 90-day lookback the account''s only credits are
+  cash deposits (16,804.17). Cash deposits are consistent in type with a hairdressing business, but May
+  credits of 13,900.81 in 30 days exceed the expected monthly maximum of 4,167. Debits of 256,326.93 cannot
+  be funded from these credits, and the source of the remaining funds (an opening balance, earlier receipts
+  or funds introduced from elsewhere) is not visible. The meaning of Sender_account for cash deposits
+  is undocumented, so the depositor and origin of the cash cannot be established from that field.
+
+  Source of wealth is relevant because the business''s spending capacity appears far greater than its
+  declared turnover; no accounts, business records or wealth information are available.
+
+  Investigative actions not evidenced as completed in the case pack: obtaining the account balance and
+  activity before 2023-02-18; establishing the purpose of payments to the main payees; establishing the
+  origin of the cash deposits; and confirming current business turnover.
+
+  The source of funds and source of wealth cannot be treated as established or verified on the available
+  record.
+
+  '
+screening_adverse_media: 'No screening results are available in the simulation dataset; screening outcomes
+  cannot be verified. The synthetic customer profile records PEP No and adverse media No as KYC flags
+  on file; these are profile attributes, not evidence of completed screening or clear results.
+
+  Screening of the customer and material counterparties is not evidenced as completed in the case pack.
+  Parties for assessment: the customer and its owners or controllers; the main domestic payees 1797551721,
+  9931229430, 8872648210, 6722284586 and 1680247748; the Nigeria-located recipient 8284454744; and the
+  Switzerland-located recipient 9478434202. The data contains account identifiers and bank locations but
+  no names, so screening outcomes cannot be verified; adverse-media and PEP checks on material counterparties
+  are also not evidenced as completed.
+
+  The cross-border activity raises a sanctions-control consideration. The available evidence does not
+  establish any sanctions match or connection to a sanctioned person or entity. Appearance on the project''s
+  historical June 2023 jurisdiction watchlist is not, by itself, evidence of a sanctions match.
+
+  '
+rationale: 'The material concerns are not resolved, but on the current record they do not yet support
+  a suspicion. The decisive gap is that most of the account''s funding is not visible: debits of 256,326.93
+  against credits of 16,804.17, with no balance and no earlier history in the investigator data.
+
+  The TM01 trigger is given limited weight. Four deposits on consecutive days from one identifier, rising
+  in size with one just below the band, are a pattern to note, but regular deposits of takings are expected
+  for a cash-handling business and the amounts are uneven. The more significant concern is scale: spending
+  of about 64k–77k per full month is many times the declared turnover, and the purpose of the repeat domestic
+  payments and the small recurring overseas payments is unexplained.
+
+  Legitimate explanations considered include an existing balance or business reserves, funds introduced
+  by the owner, and outdated KYC (the business may have grown beyond its declared turnover). Each is untested
+  but remains plausible, because the evidence that would confirm or exclude it (balance, history, business
+  records) is outside the case pack rather than contradicted by it. The Nigeria payments are small (2,304.39
+  in total) and carry little weight on their own.
+
+  Limitations: the transaction currency is unverified; the customer profile is synthetic and is the KYC
+  record against which activity is assessed in this simulation; the jurisdiction watchlist is a single
+  June 2023 snapshot rather than a classification verified for the transaction dates; and the meaning
+  of Sender_account for cash deposits is undocumented. These limitations reduce precision but do not alter
+  the assessment that the record is incomplete rather than indicative of laundering.
+
+  ESCALATE_L2 is proportionate: specialist review is needed to establish the funding picture before a
+  suspicion can be formed or excluded. If a suspicion is formed, internal disclosure must not be delayed.
+
+  '
+disposition: ESCALATE_L2
+escalation_decision: 'Refer to the L2 Transaction Monitoring team for specialist assessment of: (1) the
+  account balance and activity before 2023-02-18, to establish how outflows of 256,326.93 were funded;
+  (2) the purpose of payments to 1797551721, 9931229430, 8872648210, 6722284586 and 1680247748; (3) the
+  origin of cash deposits recorded against identifiers 5469235956 and 9073614033; and (4) screening of
+  the customer and material counterparties, including Nigeria-located recipient 8284454744.
+
+  Internal disclosure is not made at this stage because the observed activity (cash takings and business-type
+  payments) is consistent with an under-declared but legitimate business and the key unknown, how the
+  outflows were funded, is a gap in the record rather than an observed suspicious pattern.
+
+  Any request for information is to be agreed with L2 or the MLRO and worded neutrally; the tipping-off
+  restriction (POCA s.333A) applies if suspicion is later formed.
+
+  Recommend a CDD refresh and customer risk-rating review: the recorded rating of Medium and expected
+  monthly credits of 0–4,167 require reassessment against the observed activity. Assign to the CDD/KYC
+  owner with a due date in the restricted remediation tracker; any customer-facing refresh request is
+  assessed first so that it does not disclose the internal report or prejudice an investigation. These
+  actions do not replace the escalation.
+
+  No internal disclosure is made at this stage, so the disclosure-tracking fields are null. The simulation
+  contains no case-handling record, so opening and closure dates are not recorded. If L2 or any later
+  review forms a suspicion, prompt internal disclosure to the nominated officer/MLRO is required and must
+  not wait for completion of L2 work. The firm''s detailed escalation procedure is not available in this
+  simulation.
+
+  '
+suspicion_formed_at: null
+internal_disclosure_at: null
+disclosure_recipient: null
+referral_evidence: null

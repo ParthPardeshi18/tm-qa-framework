@@ -1,0 +1,7 @@
+scenario,scenario_name,alerts,accounts,laundering_labelled_alerts,laundering_labelled_pct,typologies_in_windows
+TM01,Structuring (repeated cash deposits),375,349,47,12.5,Smurfing
+TM02,Rapid movement of funds,1520,1364,28,1.8,"Behavioural_Change_1, Behavioural_Change_2, Cycle, Deposit-Send, Fan_Out, Layered_Fan_In, Single_large, Structuring"
+TM03,High-risk jurisdiction exposure,3956,3845,47,1.2,"Behavioural_Change_1, Bipartite, Cycle, Deposit-Send, Fan_In, Fan_Out, Gather-Scatter, Layered_Fan_In, Layered_Fan_Out, Over-Invoicing, Scatter-Gather, Single_large, Smurfing, Stacked Bipartite, Structuring"
+TM04,Fan-in (many distinct senders),1556,1556,7,0.4,"Bipartite, Cash_Withdrawal, Layered_Fan_In, Stacked Bipartite, Structuring"
+TM05,Fan-out (many distinct receivers),1615,1615,0,0.0,
+TM06,Behavioural change vs history and profile,2273,2252,8,0.4,"Cash_Withdrawal, Cycle, Over-Invoicing, Smurfing, Structuring"
