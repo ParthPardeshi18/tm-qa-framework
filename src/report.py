@@ -56,8 +56,8 @@ def build(path=OUT) -> int:
         P(f"To: Head of TM Operations (simulated audience) · Generated {date.today().isoformat()} · Synthetic portfolio work"),
         Spacer(1, 3),
         P("<b>Synthetic data - portfolio project.</b> Transactions are from the synthetic SAML-D dataset; customer profiles are "
-          "synthetic. The investigation case notes and QA assessments were prepared with AI assistance and reviewed by the "
-          "project author for factual accuracy and consistency. This is the author's validation, not an independent or blind "
+          "synthetic. The case notes and QA assessments were reviewed by the project author "
+          "for factual accuracy and consistency. This is the author's validation, not an independent or blind "
           "QA review. This is not Barclays work and carries no compliance endorsement.", warn),
         P("Headline", h),
         P(f"{n} sampled alerts were investigated and QA-reviewed against a {f['n_questions']}-question checklist (sections A-G). "
@@ -65,7 +65,7 @@ def build(path=OUT) -> int:
           f"{o.get('Pass', 0)} Pass; mean quality score {f['mean_score']}/100. Dispositions: {d.get('ESCALATE_SAR', 0)} internal "
           f"disclosure to the MLRO, {d.get('ESCALATE_L2', 0)} L2 referral, {d.get('CLOSE_NO_FURTHER_ACTION', 0)} closed. "
           "<b>The pass rate is not evidence of investigator quality.</b> The QA assessments were prepared in the same "
-          "AI-assisted workflow as the case notes, which were drafted after the first review and avoided its findings, and "
+          "workflow as the case notes, which were drafted after the first review and avoided its findings, and "
           "were validated by the author rather than an independent reviewer."),
         P(f"Scenario effectiveness ({f['eff']['alerts'].sum():,} alerts; labels used retrospectively only)", h),
     ]

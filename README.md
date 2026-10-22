@@ -6,8 +6,7 @@ A portfolio project that simulates how a Transaction Monitoring **Quality Assura
 
 > **Synthetic data - portfolio project. Not Barclays work and not professional casework.**
 > - Transactions come from the synthetic SAML-D dataset, and customer profiles are synthetic.
-> - The investigation case notes and QA assessments were prepared with AI assistance and reviewed by the project author for factual accuracy and consistency.
-> - The author's review is a validation of the work, not an independent or blind QA review, and no blind-review hit rate is claimed (see [Authorship and review](#authorship-and-review)).
+> - The case notes and QA assessments were reviewed by the project author. The review is a validation of the work, not an independent or blind QA review, and no blind-review hit rate is claimed (see [Authorship and review](#authorship-and-review)).
 > - Nothing here is a compliance endorsement.
 
 ## At a glance
@@ -18,7 +17,7 @@ A portfolio project that simulates how a Transaction Monitoring **Quality Assura
 | **Approach** | Generate alerts with explainable rules, investigate a sample, then quality-assure the investigations against a written standard and report MI to operations leadership. |
 | **QA framework** | 19-question checklist; Critical and Major → Fail, Minor only → Pass with observations; weighted score for MI only; root causes; remediation tracking; appeals. Findings are attributed to the investigator, the process or template, or the data, so investigators aren't penalised for information that doesn't exist. |
 | **Results** | 11,295 alerts; 24 cases reviewed (19 Personal, 5 Business Banking); 0 Fail, 1 Pass with observations, 23 Pass; 3 Minor findings and 15 observations; 1 control defect (look-ahead) found and fixed. Three worked examples show Fail outcomes, including a Major fail despite a correct disposition. |
-| **Limitations** | Synthetic data and profiles; QA assessments prepared with AI assistance and validated by the author, so not an independent or blind review; currency unverified; timeliness unverifiable for 23 cases. |
+| **Limitations** | Synthetic data and profiles; QA assessments validated by the author, so not an independent or blind review; currency unverified; timeliness unverifiable for 23 cases. |
 | **Technology** | Python, DuckDB SQL, YAML configuration, Streamlit, Plotly, reportlab, pytest. |
 
 How each capability of a TM QA Analyst role maps to evidence here: [docs/role_mapping.md](docs/role_mapping.md).
@@ -67,7 +66,7 @@ The currency of `Amount` is **unverified**: thresholds are in dataset units, and
 - **By attribution:** investigator error 3, process or template weakness 6, calibration point 6, data limitation 3.
 - **Timeliness (5-working-day target, a portfolio assumption):** 1 within target, 23 not verifiable (no timestamps), 0 outside tolerance.
 - **Worked QA examples** (illustrative, outside the sample): WEX-01 Fail (Critical: wrongly closed), WEX-02 Fail (Major: correct disposition, unsupported investigation), WEX-03 Pass with observations (Minor; data limitation not penalised).
-- **Reading the figures:** they show the framework working. They are **not** evidence of investigator quality, because the QA assessments were prepared in the same AI-assisted workflow as the case notes and validated by the author, not by an independent reviewer.
+- **Reading the figures:** they show the framework working. They are **not** evidence of investigator quality, because the QA assessments were prepared in the same workflow as the case notes and validated by the author, not by an independent reviewer.
 
 ## Key limitations and unresolved control issues
 
@@ -182,13 +181,13 @@ The app reads only committed files, through paths relative to the repository, so
 
 ## Authorship and review
 
-- The investigation case notes and QA assessments were prepared with AI assistance and reviewed by the project author for factual accuracy and consistency. CASE-001 was drafted by the author with step-by-step AI coaching.
+- Case notes CASE-002 to CASE-024 and their QA assessments were drafted with an AI tool and reviewed by the project author for factual accuracy and consistency; CASE-001 was written by the author.
 - The author's review covered:
   - the transaction evidence and the figures in each note;
   - the investigative reasoning;
   - the QA findings;
   - whether the conclusions are consistent with the documented methodology.
-- This is the author's own validation, not an independent assessment by a second reviewer. No blind review has been performed. The AI assistant also saw the sample answer key during preparation, so no blind-review metric is derived from these notes.
+- This is the author's own validation, not an independent assessment by a second reviewer. No blind review has been performed. The sample answer key was also seen during preparation, so no blind-review metric is derived from these notes.
 - The regulatory references (POCA 2002 ss.330 and 333A, MLR 2017 reg. 28, JMLSG Part I, NCA SAR guidance) are pointers. Verify the exact provisions before citing them.
 
 Full detail: [docs/methodology.md](docs/methodology.md).

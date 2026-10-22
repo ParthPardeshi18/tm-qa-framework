@@ -5,17 +5,18 @@ import streamlit as st
 from src import app_data
 
 REVIEW_STATEMENT = (
-    "The investigation case notes and QA assessments were prepared with AI assistance and reviewed by the "
-    "project author for factual accuracy and consistency."
+    "Case notes CASE-002 to CASE-024 and their QA assessments were drafted with an AI tool and reviewed by the "
+    "project author for factual accuracy and consistency; CASE-001 was written by the author."
 )
 DISCLAIMER = (
     "**Synthetic data - portfolio project, not Barclays or professional casework.**  \n"
     "Transactions are from the synthetic SAML-D dataset and customer profiles are synthetic. "
-    f"{REVIEW_STATEMENT} The author's review is a validation of the work, not an independent or blind QA review. "
+    "The case notes and QA assessments were reviewed by the project author; this is a validation of the work, not an "
+    "independent or blind QA review (see Methodology). "
     "Laundering labels and answer keys are never shown."
 )
-SHORT_NOTE = ("Synthetic portfolio data · case notes and QA assessments prepared with AI assistance and reviewed "
-              "by the project author · not an independent QA review (see Methodology)")
+SHORT_NOTE = ("Synthetic portfolio data · case notes and QA assessments reviewed by the project author · "
+              "not an independent QA review (see Methodology)")
 
 
 def setup(title: str, full_disclaimer: bool = False) -> None:

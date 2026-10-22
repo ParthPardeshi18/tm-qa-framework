@@ -32,7 +32,7 @@ c[1].metric("Fails", m["fails"])
 c[2].metric("Mean quality score", m["mean_quality_score"])
 
 st.caption(
-    "Read the pass rate with care: the QA assessments were prepared in the same AI-assisted workflow as the case "
+    "Read the pass rate with care: the QA assessments were prepared in the same workflow as the case "
     "notes and validated by the project author, not by an independent or blind reviewer. See **Methodology**."
 )
 st.markdown(

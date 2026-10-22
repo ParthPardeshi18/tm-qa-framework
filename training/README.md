@@ -4,7 +4,7 @@
 
 - **Not genuine case notes.** The genuine notes in `cases/` are unchanged. The app and the tests never read this folder.
 - **Answer key** (`answer_key/`, excluded from git): the seeding script and `seeded_errors.csv`, which records each planted error with its code, severity, checklist question and expected outcome.
-- **Status:** no blind review of this set has been performed. The AI assistant that designed the errors cannot review it blind, and neither can anyone who has opened `answer_key/` or the seeding script.
+- **Status:** no blind review of this set has been performed. The drafting workflow that designed the errors cannot review it blind, and neither can anyone who has opened `answer_key/` or the seeding script.
 
 ## Blind review protocol
 

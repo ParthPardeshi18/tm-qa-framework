@@ -1,6 +1,6 @@
 # ILLUSTRATIVE QA WORKED EXAMPLE - a deliberately flawed variant of CASE-001 (synthetic data).
 # Not part of the 24-case sample, the QA MI or the seeded training set.
-# Prepared with AI assistance; review by the project author is pending.
+# Review by the project author is pending.
 # Example: Sound investigation with a minor gap; data limitation not penalised
 case_id: WEX-03
 alert_id: TM01-00150

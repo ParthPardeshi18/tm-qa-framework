@@ -120,7 +120,7 @@ def test_findings_tracker_empty_filter_state():
 def test_page_renders_without_exception_and_shows_disclaimer(page):
     at = AppTest.from_file(str(page), default_timeout=120).run()
     assert not at.exception, at.exception
-    from src.app_ui import REVIEW_STATEMENT, SHORT_NOTE
+    from src.app_ui import DISCLAIMER, SHORT_NOTE
     shown = [e.value for e in at.info] + [e.value for e in at.caption]
-    expected = REVIEW_STATEMENT if page.name == "Home.py" else SHORT_NOTE
+    expected = DISCLAIMER if page.name == "Home.py" else SHORT_NOTE
     assert any(expected in text for text in shown), page.name

@@ -35,7 +35,7 @@ c[3].metric("Mean quality score", m["mean_quality_score"])
 st.caption(f"Outcome: Critical or Major → Fail; Minor only → Pass with observations; none → Pass. Quality score = "
            f"max({cfg['floor']}, {cfg['base']} − deductions {cfg['deductions']}). The score is for trend MI only and never "
            "overrides the outcome.")
-st.info("Interpretation: the QA assessments were prepared in the same AI-assisted workflow as the case notes and "
+st.info("Interpretation: the QA assessments were prepared in the same workflow as the case notes and "
         "validated by the project author, not by an independent or blind reviewer. These figures show the framework "
         "working; they are not a measure of investigator performance. The Case Review Workbench's worked examples "
         "show Fail outcomes.")

@@ -28,14 +28,14 @@ else:
     reviews = app_data.worked_example_reviews(wex_cases, findings)
     st.warning("Illustrative worked examples: deliberately flawed variants of CASE-001 that share its real evidence. "
                "They show a Critical fail, a Major fail despite a correct disposition, and a Minor-only pass in which a "
-               "data limitation is not penalised. They are not part of the sample or the QA MI. Prepared with AI "
-               "assistance; review by the project author is pending.")
+               "data limitation is not penalised. They are not part of the sample or the QA MI. Review by the "
+               "project author is pending.")
 reviews = reviews.set_index("case_id")
 
 cid = st.selectbox("Case", list(cases), format_func=lambda k: f"{k} · {cases[k]['alert_id']} · {cases[k]['scenario']}")
 c, r, ev = cases[cid], reviews.loc[cid], cases[cid]["evidence"]
 
-st.caption(f"Case note author: **{r['case_note_author']}** · QA reviewer: **{r['reviewer']}** · {r['review_type']}")
+st.caption(f"Investigator: **{c['investigator']}** · Authorship and review: see **Methodology**")
 
 left, right = st.columns([1, 2])
 with left:

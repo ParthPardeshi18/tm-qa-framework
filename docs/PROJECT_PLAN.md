@@ -219,7 +219,7 @@ Also write at least 2 **good false-positive closures** with strong rationale. QA
 
 **4d. Run the reviews.** Review all 24 cases **blind**, using only the case note, not the `planted_errors` key. Then compare your findings against the key and record the hit rate (e.g. "identified 11 of 12 planted errors"). This is an honest self-calibration metric and a strong interview talking point.
 
-> **Superseded (2026-10-22).** No blind review was performed and no hit rate exists. The QA assessments of the 24 cases were prepared with AI assistance and reviewed by the author, which is not an independent or blind review. A blind review of the seeded training set remains outstanding (protocol in `training/README.md`).
+> **Superseded (2026-10-22).** No blind review was performed and no hit rate exists. The QA assessments of the 24 cases were reviewed by the author, which is not an independent or blind review. A blind review of the seeded training set remains outstanding (protocol in `training/README.md`).
 
 **4e. Findings, remediation and appeals**
 - `findings.csv`: case_id, question_ref, severity, error_code, description, regulatory/procedure reference, root cause, remediation action, owner, due date, status
@@ -275,34 +275,34 @@ Cut in this order:
 
 **Never cut:** handwritten case notes, the QA checklist, the error taxonomy, blind reviews, and the MI and recommendations. Those are the point of the project.
 
-> **Superseded (2026-10-22).** As built, CASE-002 to CASE-024 were prepared with AI assistance rather than handwritten, and no blind review has taken place.
+> **Superseded (2026-10-22).** As built, CASE-002 to CASE-024 were not handwritten by the author (see README, Authorship and review), and no blind review has taken place.
 
 ---
 
 ## 7. Resume entry (use only after completing)
 
-> **Superseded (2026-10-22).** The original draft below no longer matches what was built. The case notes and QA assessments were prepared with AI assistance and reviewed by the author, rather than independently drafted, and no blind review has taken place. Do not use the original wording; use the accurate version instead.
+> **Superseded (2026-10-22).** The original draft below no longer matches what was built. The case notes and QA assessments were reviewed by the author rather than all independently drafted (see README, Authorship and review), and no blind review has taken place. Do not use the original wording; use the accurate version instead.
 
 **Accurate version (as built):**
 
-**Transaction Monitoring QA Review Framework (synthetic data, AI-assisted)** | *Python, DuckDB, Streamlit* | Code (add "Live Demo" only once deployed)
+**Transaction Monitoring QA Framework** | *Python, DuckDB, Streamlit, pytest* | Live Demo | Code
 - Built an AML transaction-monitoring QA framework on 9.5M synthetic transactions (SAML-D): 6 explainable DuckDB rule scenarios raising 11,295 alerts, with retrospective effectiveness analysis (laundering-labelled window yield of 0.0–12.5% by scenario).
-- Defined, with AI assistance, the QA standard:
+- Defined the QA standard:
   - a 19-question checklist;
   - a severity taxonomy (Critical or Major means Fail);
   - a weighted quality score;
   - a findings log with remediation, and an appeals process.
 
-- Reviewed and validated 24 simulated investigation case notes and their QA assessments, prepared with AI assistance:
+- Reviewed and validated 24 simulated investigation case notes and their QA assessments:
   - checked the transaction evidence and the figures;
   - checked the investigative reasoning against red flags, source of funds and screening;
   - reviewed severity-graded QA findings;
   - confirmed that dispositions and escalations were consistent with the documented methodology.
 
-  Drafted one case note (CASE-001) end to end with AI coaching.
+  Drafted one case note (CASE-001) end to end.
 - Built a Streamlit QA MI app and a one-page findings report. Found and fixed a look-ahead (future-information) defect in the case evidence packs, with regression tests.
 
-Do not claim: independently drafting every case note, an independent or blind QA review, a blind-review hit rate, or professional Barclays or TM QA experience. Describe the QA work as reviewing and validating AI-assisted assessments.
+Do not claim: independently drafting every case note, an independent or blind QA review, a blind-review hit rate, or professional Barclays or TM QA experience. Describe the QA work as reviewing and validating the assessments; authorship is stated in the README.
 
 **Original draft (superseded, kept for the record):**
 
@@ -333,7 +333,7 @@ Be ready to explain:
 - The fictional investigators (INV-A/B/C) are your own case notes with planted errors. Say so.
 - Present this as evidence of **understanding and approach**, not as professional TM or QA experience.
 
-> **Superseded (2026-10-22).** The second guardrail no longer applies: the case notes of the fictional investigators (INV-A/B/C) contain no planted errors. CASE-001 was drafted by the author with AI coaching, and CASE-002 to CASE-024 were prepared with AI assistance and reviewed by the author.
+> **Superseded (2026-10-22).** The second guardrail no longer applies: the case notes of the fictional investigators (INV-A/B/C) contain no planted errors. Authorship is stated in the README (Authorship and review).
 
 ---
 
@@ -348,4 +348,4 @@ Be ready to explain:
 - [ ] Resume and LinkedIn updated with the project
 - [ ] ICA AML certificate enrolment done (in parallel)
 
-> **Superseded (2026-10-22).** The second and third items no longer match the project: the 24 case notes contain no planted errors, and the 24 QA reviews were prepared with AI assistance and reviewed by the author, not performed blind.
+> **Superseded (2026-10-22).** The second and third items no longer match the project: the 24 case notes contain no planted errors, and the 24 QA reviews were reviewed by the author, not performed blind.

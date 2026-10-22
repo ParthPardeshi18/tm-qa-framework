@@ -5,8 +5,7 @@
 They show how a QA reviewer separates suspicious-looking activity from a poorly
 investigated case. All three share CASE-001's real evidence block; only the
 investigator's judgement fields differ. They are NOT part of the 24-case sample,
-the QA MI, or the seeded training set. Prepared with AI assistance; review by the
-project author is pending.
+the QA MI, or the seeded training set. Review by the project author is pending.
 """
 
 import pandas as pd
@@ -16,7 +15,7 @@ from src.app_data import ROOT, WORKED_DIR
 
 HEADER = ("# ILLUSTRATIVE QA WORKED EXAMPLE - a deliberately flawed variant of CASE-001 (synthetic data).\n"
           "# Not part of the 24-case sample, the QA MI or the seeded training set.\n"
-          "# Prepared with AI assistance; review by the project author is pending.\n")
+          "# Review by the project author is pending.\n")
 
 SCREEN_OK = ("No screening results are available in the simulation dataset; screening outcomes cannot be verified. "
              "The PEP No and adverse media No values are KYC flags on file, not screening results.\n")

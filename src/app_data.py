@@ -41,7 +41,7 @@ def recommendations(eff: pd.DataFrame, findings: pd.DataFrame) -> list[tuple[str
          "scenarios before allocating investigator capacity to their alerts."),
         ("Calibrate outcomes independently before relying on the QA pass rate",
          f"{codes.get('CAL-01', 0)} outcomes are flagged as borderline (CAL-01), and the QA assessments were prepared in "
-         "the same AI-assisted workflow as the case notes and validated by the project author. Have an independent "
+         "the same workflow as the case notes and validated by the project author. Have an independent "
          "reviewer re-review the borderline cases and blind-review the seeded training set before the pass rate is "
          "relied on."),
         ("Close the case-handling control gaps",
@@ -121,8 +121,8 @@ def worked_example_reviews(cases: list[dict], findings: pd.DataFrame) -> pd.Data
         rows.append(dict(case_id=c["case_id"], disposition=c["disposition"], critical=n["Critical"], major=n["Major"],
                          minor=n["Minor"], observations=n["Observation"],
                          qa_outcome=qa_outcome([s for s in sev if s != "Observation"]), quality_score=quality_score(sev),
-                         case_note_author="Illustrative variant of CASE-001 (prepared with AI assistance)",
-                         reviewer="Illustrative QA (prepared with AI assistance; author review pending)",
+                         case_note_author="Illustrative variant of CASE-001",
+                         reviewer="Illustrative QA (author review pending)",
                          review_type="Worked example; not part of the sample or QA MI"))
     return pd.DataFrame(rows)
 

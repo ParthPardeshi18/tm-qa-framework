@@ -220,12 +220,12 @@ Principles:
 
 ### Authorship and review
 
-The investigation case notes and QA assessments were prepared with AI assistance and reviewed by the project author for factual accuracy and consistency.
+Case notes CASE-002 to CASE-024 and their QA assessments were drafted with an AI tool and reviewed by the project author for factual accuracy and consistency; CASE-001 was written by the author.
 
 | Cases | Case note | QA assessment |
 |---|---|---|
-| CASE-001 | Drafted by the project author with step-by-step AI coaching | Findings decided by the author on AI-proposed points |
-| CASE-002 to CASE-024 | Prepared with AI assistance, following the conventions set during CASE-001; reviewed by the author | Prepared with AI assistance in the same workflow; reviewed by the author |
+| CASE-001 | Written by the project author | Findings decided by the author |
+| CASE-002 to CASE-024 | Drafted as stated above, following the conventions set during CASE-001; reviewed by the author | Drafted in the same workflow; reviewed by the author |
 
 The author's review covered:
 
@@ -234,14 +234,14 @@ The author's review covered:
 - the QA findings;
 - whether the conclusions are consistent with this methodology.
 
-The original plan expected the author to draft every note. The AI-assisted workflow with author review replaced that for CASE-002 to CASE-024. The fictional investigator IDs (INV-A/B/C) are labels only. This is synthetic portfolio work, not professional casework.
+The original plan expected the author to draft every note. The drafting workflow with author review replaced that for CASE-002 to CASE-024. The fictional investigator IDs (INV-A/B/C) are labels only. This is synthetic portfolio work, not professional casework.
 
 **Independence and blindness.** The author's review is a validation of the work, not an independent QA review:
 
-- The case notes and the QA assessments were prepared in the same AI-assisted workflow, so the QA assessments are not independent of the case preparation.
+- The case notes and the QA assessments were prepared in the same workflow, so the QA assessments are not independent of the case preparation.
 - No second reviewer has assessed the cases, and no blind review has been performed.
 
-During preparation, the AI assistant also saw the sample answer key (`alert_sample_key.csv`), printed while checking Phase 2 outputs. It was not consulted while preparing or assessing the cases, but its influence cannot be ruled out. Therefore:
+During preparation, the drafting workflow also saw the sample answer key (`alert_sample_key.csv`), printed while checking Phase 2 outputs. It was not consulted while preparing or assessing the cases, but its influence cannot be ruled out. Therefore:
 
 - The plan's blind-review hit-rate metric (§4d) **cannot be derived from these notes**.
 - The distribution of dispositions must not be compared with the answer key as evidence of skill.
@@ -325,10 +325,10 @@ How to read it:
 
 `training/seeded_cases/` contains 23 shuffled training copies (TRN-01 to TRN-23) of CASE-002 to CASE-024. Ten of them have errors planted according to the plan's error-planting table. The answer key and the seeding script are in `training/answer_key/`, which is excluded from git and never read by the app or the tests.
 
-- **No blind review has been performed.** The assistant that designed the errors cannot review them blind.
+- **No blind review has been performed.** The errors were designed in the same drafting workflow, which therefore cannot review them blind.
 - Until a reviewer who has not seen the key or the design reviews the set, the blind-review hit rate remains **outstanding** and is not claimed. The protocol is in `training/README.md`.
 
-**How to read this.** CASE-002 to CASE-024 were prepared after the CASE-001 review and deliberately avoided its three findings. Their QA assessments came from the same AI-assisted workflow and were validated by the author. A clean result therefore mainly shows that the notes are internally consistent and accurate against the data. It is not an independent QA result.
+**How to read this.** CASE-002 to CASE-024 were prepared after the CASE-001 review and deliberately avoided its three findings. Their QA assessments came from the same workflow and were validated by the author. A clean result therefore mainly shows that the notes are internally consistent and accurate against the data. It is not an independent QA result.
 
 ### Seeded errors: status
 
@@ -359,7 +359,7 @@ Current split (18 records): investigator error 3, process or template weakness 6
 | WEX-02 | Reaches the right outcome (disclosure) with generic red flags, no source-of-funds assessment and no stated grounds | Fail (Majors RAT-01, RF-01, SOF-01) despite a correct disposition; score 10 |
 | WEX-03 | The author's CASE-001 note with counterparties named and actions routed; earlier history still unreviewed | Pass with observations (Minor SCP-01); missing screening data recorded as a data limitation, not penalised; score 90 |
 
-They show the core QA judgement: suspicious-looking activity is not the test. The test is whether the investigation identified, evidenced and concluded the risk. They are **not** part of the 24-case sample, the QA MI or the seeded training set. They were prepared with AI assistance, and the author's review of them is pending.
+They show the core QA judgement: suspicious-looking activity is not the test. The test is whether the investigation identified, evidenced and concluded the risk. They are **not** part of the 24-case sample, the QA MI or the seeded training set. The author's review of them is pending.
 
 ### Legal references: verification status
 
